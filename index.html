@@ -283,21 +283,6 @@
     .win-item { grid-template-columns: 32px 1fr; gap: 12px; padding: 18px 20px; }
   }
 
-  /* PASSWORD GATE */
-  #pw-gate { position: fixed; inset: 0; background: #0d0d0d; display: flex; align-items: center; justify-content: center; z-index: 9999; }
-  #pw-box { text-align: center; padding: 52px 44px; max-width: 420px; width: 90%; border: 1px solid #2a2a2a; border-radius: 16px; background: #1a1a1a; }
-  .pw-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #CC0000; margin-bottom: 18px; }
-  #pw-box h2 { color: white; font-size: 26px; font-weight: 800; letter-spacing: -0.5px; line-height: 1.15; margin-bottom: 8px; }
-  #pw-box h2 span { color: #CC0000; }
-  .pw-sub { color: #555; font-size: 13px; margin-bottom: 28px; line-height: 1.7; }
-  .pw-field { width: 100%; padding: 13px 16px; border-radius: 8px; border: 1.5px solid #333; background: #111; color: white; font-size: 15px; text-align: center; margin-bottom: 10px; outline: none; box-sizing: border-box; }
-  .pw-field:focus { border-color: #CC0000; }
-  .pw-field::placeholder { color: #444; font-size: 14px; }
-  #pw-input { letter-spacing: 3px; }
-  #pw-input::placeholder { letter-spacing: 0; }
-  #pw-submit { width: 100%; padding: 13px; background: #CC0000; color: white; border: none; border-radius: 8px; font-size: 15px; font-weight: 700; cursor: pointer; margin-top: 2px; }
-  #pw-submit:hover { background: #a30000; }
-  #pw-error { color: #CC0000; font-size: 13px; margin-top: 12px; display: none; }
 
 </style>
 </head>
@@ -993,52 +978,9 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-var LOG_ENDPOINT = 'https://formspree.io/f/xykoryqk'; // Apps Script URL goes here
-(function() {
-  if (sessionStorage.getItem('ngs-auth') === '1') {
-    var g = document.getElementById('pw-gate');
-    if (g) g.style.display = 'none';
-  }
-})();
-function checkPw() {
-  var email = document.getElementById('pw-email').value.trim();
-  var pw = document.getElementById('pw-input').value;
-  var emailOk = email && /^[^@]+@[^@]+\.[^@]+$/.test(email);
-  if (pw === 'NGS2026' && emailOk) {
-    document.getElementById('pw-gate').style.display = 'none';
-    sessionStorage.setItem('ngs-auth', '1');
-    if (LOG_ENDPOINT) {
-      fetch(LOG_ENDPOINT, {
-        method: 'POST',
-        body: JSON.stringify({ email: email, timestamp: new Date().toISOString(), userAgent: navigator.userAgent }),
-        headers: { 'Content-Type': 'application/json' }
-      }).catch(function(){});
-    }
-  } else {
-    document.getElementById('pw-error').style.display = 'block';
-    if (!emailOk) document.getElementById('pw-email').focus();
-    else { document.getElementById('pw-input').value = ''; document.getElementById('pw-input').focus(); }
-  }
-}
-window.addEventListener('DOMContentLoaded', function() {
-  document.querySelectorAll('.pw-field').forEach(function(el) {
-    el.addEventListener('keydown', function(e) { if (e.key === 'Enter') checkPw(); });
-  });
-});
 
 </script>
 
-<div id="pw-gate">
-  <div id="pw-box">
-    <div class="pw-eyebrow">Evaluation Hub &middot; Confidential</div>
-    <h2>National Gym Supply<br><span>&times; Shopify Plus</span></h2>
-    <p class="pw-sub">This document is confidential and intended<br>for authorized recipients only.</p>
-    <input id="pw-email" class="pw-field" type="email" placeholder="Your email address" autocomplete="email">
-    <input id="pw-input" class="pw-field" type="password" placeholder="Access code" autocomplete="off">
-    <button id="pw-submit" onclick="checkPw()">Access Document &rarr;</button>
-    <p id="pw-error">Incorrect access code or missing email. Please try again.</p>
-  </div>
-</div>
 
 </body>
 </html>
