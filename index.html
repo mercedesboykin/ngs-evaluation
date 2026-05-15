@@ -298,7 +298,6 @@
   #gate-btn:disabled { opacity: .6; cursor: default; }
   #gate-error { color: #CC0000; font-size: 13px; margin-top: 12px; display: none; }
   #gate-fine { color: #333; font-size: 11px; margin-top: 18px; }
-
 </style>
 </head>
 <body>
@@ -432,7 +431,7 @@
           <div class="win-body">
             <div class="win-req">FR-ACC + FR-PRC · B2B Accounts & Pricing</div>
             <div class="win-title">4-Tier Pricing + Company Hierarchy — Native</div>
-            <div class="win-desc">DYODE's doc calls for A/B/C/D customer tiers, per-company price lists, and multi-buyer company accounts with inherited pricing. <strong>Shopify B2B handles all of this natively</strong> — companies, locations, buyers, and catalogs are included with Plus. Tier pricing syncs from ERP via middleware into Shopify B2B Catalogs. No third-party app, no custom code.</div>
+            <div class="win-desc">NGS requires A/B/C/D customer tiers, per-company price lists, and multi-buyer company accounts with inherited pricing. <strong>Shopify B2B handles all of this natively</strong> — companies, locations, buyers, and catalogs are included with Plus. Tier pricing syncs from ERP via middleware into Shopify B2B Catalogs. No third-party app, no custom code.</div>
           </div>
         </li>
 
@@ -441,7 +440,7 @@
           <div class="win-body">
             <div class="win-req">FR-CAT-01–11 · Catalog & Product Data</div>
             <div class="win-title">Machine Compatibility, OEM Cross-Reference & Schematics via Metaobjects</div>
-            <div class="win-desc">The prior NGS replatform failed because product specs were missing. DYODE's specification requires machine make/model compatibility lists, OEM cross-references, schematic PDFs with clickable callouts, and variant fitment data. NGS's catalog is 40,000 SKUs — the vast majority are simple products, with configurable, bundled, and custom product types isolated to the cable category. <strong>Shopify Metaobjects</strong> handle the structured data layer natively; the cable configurator is the one bespoke component, already scoped as a custom app by DYODE.</div>
+            <div class="win-desc">The prior NGS replatform failed because product specs were missing. The project requires machine make/model compatibility lists, OEM cross-references, schematic PDFs with clickable callouts, and variant fitment data. NGS's catalog is 40,000 SKUs — the vast majority are simple products, with configurable, bundled, and custom product types isolated to the cable category. <strong>Shopify Metaobjects</strong> handle the structured data layer natively; the cable configurator is the one bespoke component, scoped as a custom app.</div>
           </div>
         </li>
 
@@ -450,7 +449,7 @@
           <div class="win-body">
             <div class="win-req">FR-SHIP + FR-PRC-06–09 · Shipping & Discount Logic</div>
             <div class="win-title">Complex Shipping Calculator + Bulk-Qty Discounts via Shopify Functions</div>
-            <div class="win-desc">DYODE flagged the shipping calculator as "highest-risk subsystem" — dimensional weight, oversize/freight rules, nested-product handling, separately-shipped parts, customer carrier accounts. Plus bulk-qty price breaks (1–9=$X, 10–24=$Y, 25+=$Z) combinable with tier pricing. <strong>Shopify Functions</strong> express all of this in version-controlled, upgrade-safe code. DYODE's own doc lists Shopify Functions as a primary reason to choose Shopify Plus.</div>
+            <div class="win-desc">The shipping calculator is the highest-risk subsystem in scope — dimensional weight, oversize/freight rules, nested-product handling, separately-shipped parts, and customer carrier accounts. NGS also requires bulk-qty price breaks (1–9=$X, 10–24=$Y, 25+=$Z) combinable with tier pricing. <strong>Shopify Functions</strong> express all of this in version-controlled, upgrade-safe code — and are a primary technical reason to choose Shopify Plus.</div>
           </div>
         </li>
 
@@ -459,7 +458,7 @@
           <div class="win-body">
             <div class="win-req">FR-CMS-01–06 · Content & Marketing</div>
             <div class="win-title">Online Store 2.0 — Marketing Team Self-Serves Without Engineering</div>
-            <div class="win-desc">DYODE explicitly decided <strong>non-headless</strong> for NGS because the marketing team needs section-based CMS control without engineering dependency. Shopify's Online Store 2.0 is exactly this — drag-and-drop sections, scheduled banners, blog/resource library, SEO controls, and redirect maps for legacy OEM cross-reference URLs. DYODE locked this decision in the requirements doc.</div>
+            <div class="win-desc">The project is scoped <strong>non-headless</strong> — the NGS marketing team needs section-based CMS control without engineering dependency. Shopify's Online Store 2.0 is exactly this — drag-and-drop sections, scheduled banners, blog/resource library, SEO controls, and redirect maps for legacy OEM cross-reference URLs.</div>
           </div>
         </li>
 
@@ -468,7 +467,7 @@
           <div class="win-body">
             <div class="win-req">FR-CRT-06–07 · B2B Checkout</div>
             <div class="win-title">Net Terms, PO Capture & Deferred CC Auth at Checkout — Native</div>
-            <div class="win-desc">DYODE requires net terms at checkout, PO number as a required field for net-terms accounts, Resolve for credit decisioning, ACH for high-value orders, and deferred CC authorization for orders under internal review. <strong>Net terms and PO capture are native Shopify B2B checkout features.</strong> Deferred CC auth is a Shopify Function. Resolve integrates via Shopify's app ecosystem.</div>
+            <div class="win-desc">NGS requires net terms at checkout, PO number as a required field for net-terms accounts, Resolve for credit decisioning, ACH for high-value orders, and deferred CC authorization for orders under internal review. <strong>Net terms and PO capture are native Shopify B2B checkout features.</strong> Deferred CC auth is a Shopify Function. Resolve integrates via Shopify's app ecosystem.</div>
           </div>
         </li>
 
@@ -477,7 +476,7 @@
           <div class="win-body">
             <div class="win-req">FR-QUO-01–05 · Quoting</div>
             <div class="win-title">Save-as-Quote / Draft Orders — Core B2B Workflow Covered</div>
-            <div class="win-desc">DYODE requires converting a cart to a quote at any point, manager approval routing, quote expiration with reminders, price-locked quote-to-order conversion, and PDF export. <strong>Shopify B2B Draft Orders</strong> cover the core of this — cart-to-quote, price locking, and order conversion. Manager approval routing and PDF export are buildable on top with Shopify Flow and a lightweight custom app. Additional configuration is required, built on a strong native foundation.</div>
+            <div class="win-desc">NGS requires converting a cart to a quote at any point, manager approval routing, quote expiration with reminders, price-locked quote-to-order conversion, and PDF export. <strong>Shopify B2B Draft Orders</strong> cover the core of this — cart-to-quote, price locking, and order conversion. Manager approval routing and PDF export are buildable on top with Shopify Flow and a lightweight custom app. Additional configuration is required, built on a strong native foundation.</div>
           </div>
         </li>
 
@@ -486,7 +485,7 @@
           <div class="win-body">
             <div class="win-req">§ 2.3 Multi-Brand Strategy</div>
             <div class="win-title">NGS + Intek + Future Brands Under One Shopify Organization</div>
-            <div class="win-desc">DYODE's requirements explicitly call for NGS and Intek as <strong>separate storefronts under one Shopify Organization</strong>, with independent themes, pricing, and content — but a shared middleware layer. Adding a third or fourth brand should not require rebuilding the middleware. Shopify Plus expansion stores do exactly this. One admin login, shared team, separate customer-facing experiences.</div>
+            <div class="win-desc">The requirement is NGS and Intek as <strong>separate storefronts under one Shopify Organization</strong>, with independent themes, pricing, and content — but a shared middleware layer. Adding a third or fourth brand should not require rebuilding the middleware. Shopify Plus expansion stores do exactly this. One admin login, shared team, separate customer-facing experiences.</div>
           </div>
         </li>
 
@@ -495,7 +494,7 @@
           <div class="win-body">
             <div class="win-req">NFR-SEO-01–04 · SEO</div>
             <div class="win-title">OEM Cross-Reference URL Preservation — Built-In Redirect Infrastructure</div>
-            <div class="win-desc">DYODE flagged SEO as "non-negotiable" given the long-tail of OEM cross-reference pages that drive organic traffic. Requirements: 301 redirect map from legacy URLs, structured data (Product, Offer, Breadcrumb) on all PDPs, XML sitemaps per brand, canonical handling for fitment duplicates. <strong>Shopify handles all of this natively</strong> — bulk redirects, automatic structured data, sitemaps, and canonical URLs are platform-level features.</div>
+            <div class="win-desc">SEO is a non-negotiable requirement given the long-tail of OEM cross-reference pages that drive organic traffic. Requirements include a 301 redirect map from legacy URLs, structured data (Product, Offer, Breadcrumb) on all PDPs, XML sitemaps per brand, and canonical handling for fitment duplicates. <strong>Shopify handles all of this natively</strong> — bulk redirects, automatic structured data, sitemaps, and canonical URLs are platform-level features.</div>
           </div>
         </li>
 
@@ -504,7 +503,7 @@
           <div class="win-body">
             <div class="win-req">NFR-PERF + NFR-REL · Performance & Scale</div>
             <div class="win-title">500–1,000+ Orders/Day at Peak — Shopify Plus Built for This</div>
-            <div class="win-desc">Site performance was identified as a critical evaluation criterion — the prior redesign was rejected in part due to poor load times. DYODE requires sub-600ms TTFB, under 2.5s LCP mobile, and 99.99% availability. <strong>Shopify Plus's infrastructure, CDN, and edge caching are purpose-built for this scale.</strong> Plus tier comes with higher API rate limits necessary for the integration surface area. Shopify's 99.99% SLA exceeds the requirement directly.</div>
+            <div class="win-desc">Site performance is a critical requirement — the prior redesign was rejected in part due to poor load times. NGS requires sub-600ms TTFB, under 2.5s LCP mobile, and 99.99% availability. <strong>Shopify Plus's infrastructure, CDN, and edge caching are purpose-built for this scale.</strong> Plus tier comes with higher API rate limits necessary for the integration surface area. Shopify's 99.99% SLA exceeds the requirement directly.</div>
           </div>
         </li>
 
@@ -992,52 +991,6 @@ window.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
-
-
-// EMAIL GATE
-(function() {
-  if (sessionStorage.getItem('ngs-access') === '1') {
-    document.getElementById('gate').style.display = 'none';
-  }
-})();
-
-function submitGate() {
-  var email = document.getElementById('gate-email').value.trim();
-  var valid = email && /^[^@]+@[^@]+\.[^@]+$/.test(email);
-  if (!valid) {
-    document.getElementById('gate-error').style.display = 'block';
-    document.getElementById('gate-email').focus();
-    return;
-  }
-  document.getElementById('gate-error').style.display = 'none';
-  document.getElementById('gate-btn').disabled = true;
-  document.getElementById('gate').style.display = 'none';
-  sessionStorage.setItem('ngs-access', '1');
-  fetch('https://formspree.io/f/xykoryqk', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-    body: JSON.stringify({ email: email, page: 'NGS Evaluation Hub', timestamp: new Date().toISOString() })
-  }).catch(function(){});
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-  var inp = document.getElementById('gate-email');
-  if (inp) inp.addEventListener('keydown', function(e) { if (e.key === 'Enter') submitGate(); });
-});
-
 </script>
-
-<div id="gate">
-  <div id="gate-box">
-    <div class="gate-eyebrow">Evaluation Hub &middot; Confidential</div>
-    <h2>National Gym Supply<br><span>&times; Shopify Plus</span></h2>
-    <p>Enter your email to access this document.</p>
-    <input id="gate-email" type="email" placeholder="Your email address" autocomplete="email">
-    <button id="gate-btn" onclick="submitGate()">Access Document &rarr;</button>
-    <p id="gate-error">Please enter a valid email address.</p>
-    <p id="gate-fine">This document contains confidential information intended for authorized recipients only.</p>
-  </div>
-</div>
-
 </body>
 </html>
