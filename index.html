@@ -985,5 +985,53 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 });
 </script>
+
+<style>
+  #gate { position: fixed; inset: 0; background: #0a0a0a; display: flex; align-items: center; justify-content: center; z-index: 9999; }
+  #gate-box { text-align: center; padding: 52px 44px; max-width: 420px; width: 90%; border: 1px solid #2a2a2a; border-radius: 16px; background: #141414; }
+  .gate-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #CC0000; margin-bottom: 18px; }
+  #gate-box h2 { color: #fff; font-size: 26px; font-weight: 800; letter-spacing: -0.5px; line-height: 1.2; margin-bottom: 8px; }
+  #gate-box h2 span { color: #CC0000; }
+  #gate-box p { color: #555; font-size: 13px; margin-bottom: 28px; line-height: 1.7; }
+  #gate-email { width: 100%; padding: 13px 16px; border-radius: 8px; border: 1.5px solid #2e2e2e; background: #0d0d0d; color: #fff; font-size: 15px; text-align: center; outline: none; box-sizing: border-box; transition: border-color .2s; }
+  #gate-email:focus { border-color: #CC0000; }
+  #gate-email::placeholder { color: #444; font-size: 14px; }
+  #gate-btn { width: 100%; padding: 13px; background: #CC0000; color: #fff; border: none; border-radius: 8px; font-size: 15px; font-weight: 700; cursor: pointer; margin-top: 10px; transition: background .15s; }
+  #gate-btn:hover { background: #a30000; }
+  #gate-btn:disabled { opacity: .6; cursor: default; }
+  #gate-error { color: #CC0000; font-size: 13px; margin-top: 12px; display: none; }
+  #gate-fine { color: #333; font-size: 11px; margin-top: 18px; }
+</style>
+
+<script>
+(function() { if (sessionStorage.getItem('ngs-access') === '1') document.getElementById('gate').style.display = 'none'; })();
+function submitGate() {
+  var email = document.getElementById('gate-email').value.trim();
+  var valid = email && /^[^@]+@[^@]+\.[^@]+$/.test(email);
+  if (!valid) { document.getElementById('gate-error').style.display = 'block'; document.getElementById('gate-email').focus(); return; }
+  document.getElementById('gate-error').style.display = 'none';
+  document.getElementById('gate-btn').disabled = true;
+  document.getElementById('gate').style.display = 'none';
+  sessionStorage.setItem('ngs-access', '1');
+  fetch('https://formspree.io/f/xykoryqk', { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify({ email: email, page: 'NGS Evaluation Hub', timestamp: new Date().toISOString() }) }).catch(function(){});
+}
+document.addEventListener('DOMContentLoaded', function() {
+  var inp = document.getElementById('gate-email');
+  if (inp) inp.addEventListener('keydown', function(e) { if (e.key === 'Enter') submitGate(); });
+});
+</script>
+
+<div id="gate">
+  <div id="gate-box">
+    <div class="gate-eyebrow">Evaluation Hub &middot; Confidential</div>
+    <h2>National Gym Supply<br><span>&times; Shopify Plus</span></h2>
+    <p>Enter your email to access this document.</p>
+    <input id="gate-email" type="email" placeholder="Your email address" autocomplete="email">
+    <button id="gate-btn" onclick="submitGate()">Access Document &rarr;</button>
+    <p id="gate-error">Please enter a valid email address.</p>
+    <p id="gate-fine">This document contains confidential information intended for authorized recipients only.</p>
+  </div>
+</div>
+
 </body>
 </html>
