@@ -351,7 +351,7 @@
           <div class="stat-label">Intek Annual Revenue</div>
         </div>
         <div class="stat">
-          <div class="stat-value">Dec<span class="unit"> '26</span></div>
+          <div class="stat-value">Nov<span class="unit"> '26</span></div>
           <div class="stat-label">Target Go-Live</div>
         </div>
       </div>
@@ -384,7 +384,7 @@
             <li>Modernize the platform without disrupting established B2B purchasing workflows</li>
             <li>Rich product specs, OEM cross-reference, schematics — the primary failure point of the prior replatform attempt</li>
             <li>4-tier B2B pricing, net terms, multi-buyer company accounts</li>
-            <li>Modular ERP middleware: Everest now → NetSuite 2027</li>
+            <li>Flat file ERP integration at launch (interim approach) → NetSuite connector in 2027</li>
             <li>NGS + Intek as separate storefronts under one Shopify Organization</li>
           </ul>
         </div>
@@ -393,7 +393,7 @@
       <div class="card">
         <div class="card-title">The Evaluation</div>
         <h3>Shopify Plus vs BigCommerce — Guided by DYODE</h3>
-        <p>DYODE is acting as NGS's platform consultant and is conducting a formal evaluation of Shopify Plus and BigCommerce. DYODE's recommendation favors Shopify Plus. The technical requirements document (prepared by DYODE) explicitly identifies Shopify Plus as the preferred platform and documents the rationale.</p>
+        <p>DYODE is acting as NGS's platform consultant. The team's direction is firmly toward Shopify Plus — the comparison with BigCommerce is included here to help Tony (VP of Ecommerce) reaffirm the decision, as he has prior experience with BigCommerce at a previous company. No meaningful debate remains on platform direction.</p>
         <div class="callout callout-red">
           <p><strong>This is an approved, funded project.</strong> The initiative is fully resourced and on an active timeline — NGS is targeting go-live ahead of the New Year's 2027 peak season.</p>
         </div>
@@ -699,17 +699,18 @@
       <div class="section-header">
         <h2>Integration <span class="accent">Strategy</span></h2>
         <div class="divider"></div>
-        <p>NGS's biggest technical complexity: a two-phase ERP transition that has to be architected into the build from day one.</p>
+        <p>NGS's ERP transition is a two-phase approach — designed to launch cleanly in 2026 without dependency on Everest, then connect to NetSuite when it's ready in 2027.</p>
       </div>
 
       <div class="grid-2">
         <div class="card">
           <div class="card-title">Phase 1 — Launch (2026)</div>
-          <h3>Everest → Shopify</h3>
+          <h3>Flat File Integration</h3>
           <ul>
-            <li>Current ERP is <strong>Everest</strong> — bespoke, end-of-life, no native Shopify connector</li>
-            <li>Strategy: <strong>custom middleware</strong> built by DYODE, targeting NetSuite API structure so Everest is a fallback, not the target</li>
-            <li>Contingency: if the NetSuite migration timeline extends, operate with manual order and customer exports from Shopify until integration is complete</li>
+            <li>Current ERP is <strong>Everest</strong> — bespoke, end-of-life, not practical to integrate temporarily</li>
+            <li>Confirmed approach: <strong>flat file sync</strong> between Shopify and Everest at launch — avoids building a throwaway connector</li>
+            <li>Products, pricing, inventory, and orders move via scheduled flat file exchange until NetSuite is live</li>
+            <li>DYODE is scoping the exact file format and sync cadence as part of hours estimation</li>
           </ul>
         </div>
         <div class="card">
@@ -718,7 +719,7 @@
           <ul>
             <li>NGS migrating to <strong>NetSuite in 2027</strong>, after the Shopify launch</li>
             <li>Intek migrates to NetSuite <strong>first</strong> — NGS follows</li>
-            <li>Middleware is modular: repoint from Everest adapter to NetSuite adapter without redesign</li>
+            <li>Flat file layer replaced by a proper API connector — no Shopify rebuild required</li>
             <li>Shopify has an Oracle-built native NetSuite connector available for simpler flows (catalog, customer master)</li>
           </ul>
         </div>
@@ -729,7 +730,7 @@
       </div>
 
       <div class="callout callout-yellow" style="margin-bottom: 18px;">
-        <p>⚠️ <strong>Risk to watch:</strong> DYODE's doc flagged NetSuite API call ceilings as a risk at NGS's order volume (500–1,000+/day peak). The recommendation is a hybrid: native connector for catalog/customer sync, custom middleware for orders, inventory, RA, and returns. Jordan (SE) will validate this approach.</p>
+        <p>⚠️ <strong>To confirm in technical discovery:</strong> Final flat file format, sync cadence, and fallback handling for inventory and order data. Scope and architecture to be validated on the May 20 technical discovery call.</p>
       </div>
 
       <div class="card">
@@ -765,20 +766,20 @@
             <h4>Intro Call with DYODE</h4>
             <p>Tim Katz + Elana K. (DYODE). Both NGS + Intek confirmed in scope. ERP complexity and key requirements surfaced.</p>
           </li>
-          <li data-step="2" onclick="toggleStep(this)">
+          <li class="done" data-step="✓" data-original-step="2" onclick="toggleStep(this)">
             <span class="step-date has-date" onclick="editDate(event,this)" data-idx="1">May 15, 2026</span>
-            <h4>Discovery &amp; Requirements Call with DYODE</h4>
-            <p>Deep-dive on finalized requirements doc. Concrete answers on account portal, shipping calculator, and ERP middleware before NGS enters the room.</p>
+            <h4>Discovery &amp; Requirements Alignment with DYODE</h4>
+            <p>ERP strategy confirmed: flat file approach at launch. Timeline accelerated — build start targeting June/July. DYODE team aligned and ready to move forward.</p>
           </li>
           <li data-step="3" onclick="toggleStep(this)">
-            <span class="step-date no-date" onclick="editDate(event,this)" data-idx="2">Set date</span>
-            <h4>Merchant Discovery Call — National Gym Supply</h4>
-            <p>First call with Tony, Brian Chow (IT), and Mike (Ops). Validate requirements, demonstrate platform confidence, walk through custom module approach.</p>
+            <span class="step-date has-date" onclick="editDate(event,this)" data-idx="2">May 20, 2026</span>
+            <h4>Intro + Technical Discovery Call — National Gym Supply</h4>
+            <p>First call with Tony and the NGS team. Brief intro followed by a deep-dive on requirements, open questions, and platform capabilities. Evaluation hub shared with NGS in advance.</p>
           </li>
           <li data-step="4" onclick="toggleStep(this)">
             <span class="step-date no-date" onclick="editDate(event,this)" data-idx="3">Set date</span>
-            <h4>Technical Discovery Call</h4>
-            <p>Deep-dive with NGS IT and DYODE on ERP integration architecture, middleware design, data migration scope, and custom module requirements.</p>
+            <h4>Scoping &amp; Hours Estimation</h4>
+            <p>DYODE finalizes hours scoping and build estimate based on requirements. Flat file integration architecture confirmed. Custom module scope locked.</p>
           </li>
           <li data-step="5" onclick="toggleStep(this)">
             <span class="step-date no-date" onclick="editDate(event,this)" data-idx="4">Set date</span>
@@ -793,20 +794,20 @@
           <li data-step="7" onclick="toggleStep(this)">
             <span class="step-date no-date" onclick="editDate(event,this)" data-idx="6">Set date</span>
             <h4>Technical Scoping</h4>
-            <p>DYODE finalizes build scope, custom module estimates, and ERP middleware architecture. Jordan validates technical approach before build begins.</p>
+            <p>DYODE finalizes build scope, custom module estimates, and flat file integration architecture. Shopify SE validates technical approach before build begins.</p>
           </li>
           <li data-step="8" onclick="toggleStep(this)">
-            <span class="step-date has-date" onclick="editDate(event,this)" data-idx="7">Aug 2026</span>
+            <span class="step-date no-date" onclick="editDate(event,this)" data-idx="7">Set date</span>
             <h4>Start Trial Store</h4>
             <p>NGS on Shopify Plus — storefront setup, B2B configuration, and dev environment stood up. Build phase begins in earnest.</p>
           </li>
           <li data-step="9" onclick="toggleStep(this)">
-            <span class="step-date has-date" onclick="editDate(event,this)" data-idx="8">Aug 2026</span>
+            <span class="step-date no-date" onclick="editDate(event,this)" data-idx="8">Set date</span>
             <h4>Letter of Intent</h4>
             <p>LOI executed. Commercial terms confirmed, project timeline locked, and both parties committed to the go-live window.</p>
           </li>
           <li data-step="10" onclick="toggleStep(this)">
-            <span class="step-date has-date" onclick="editDate(event,this)" data-idx="9">Sep 30, 2026</span>
+            <span class="step-date no-date" onclick="editDate(event,this)" data-idx="9">Set date</span>
             <h4>Contract Signed</h4>
             <p>Full contract executed. Shopify Plus fully provisioned and build sprint in progress.</p>
           </li>
@@ -826,7 +827,7 @@
             <p>Full data migration: product catalog, customer accounts, order history, and OEM cross-reference URL redirects. QA and load testing completed.</p>
           </li>
           <li data-step="14" onclick="toggleStep(this)">
-            <span class="step-date has-date" onclick="editDate(event,this)" data-idx="13">Nov 2026</span>
+            <span class="step-date no-date" onclick="editDate(event,this)" data-idx="13">Set date</span>
             <h4>Go Live — Website Cutover</h4>
             <p>Current site goes dark. NGS.com and Intek launch on Shopify Plus — ahead of the New Year's resolution season spike.</p>
           </li>
@@ -836,7 +837,7 @@
       <div class="card">
         <div class="card-title">Open Questions</div>
         <ul>
-          <li><strong>Account portal:</strong> Depth of customization needed — Jordan to assess against DYODE's requirements</li>
+          <li><strong>Account portal:</strong> Unique branded portal experience per company confirmed as a requirement — depth of customization to be scoped on the May 20 technical discovery call</li>
           <li><strong>NetSuite timeline:</strong> Tony's hunch is NGS slips to 2027 — middleware "no ERP" mode contingency needs to be confirmed as viable</li>
           <li><strong>Cable Configurator:</strong> DYODE recommends phasing post-launch. NGS needs to confirm this is acceptable</li>
           <li><strong>Shipping calculator:</strong> Deep-dive with Mike (Ops) needed early — flagged as highest-risk subsystem</li>
