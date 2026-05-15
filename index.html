@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>National Gym Supply × Shopify Plus</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --red: #CC0000;
+    --red-dark: #a30000;
+    --red-light: #fff0f0;
+    --black: #0d0d0d;
+    --dark: #1a1a1a;
+    --border: #e5e5e5;
+    --text: #1a1a1a;
+    --muted: #5a5a5a;
+    --bg: #f5f5f5;
+    --white: #ffffff;
+    --max: 900px;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  /* ── CENTERING WRAPPER ── */
+  .wrap {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: var(--black);
+    border-bottom: 4px solid var(--red);
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 320px; height: 100%;
+    background: linear-gradient(135deg, transparent 40%, rgba(204,0,0,0.08));
+    pointer-events: none;
+  }
+  .header .wrap { padding-top: 64px; padding-bottom: 52px; text-align: center; }
+  .header-eyebrow {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 16px;
+  }
+  .header h1 {
+    font-size: 64px;
+    font-weight: 800;
+    color: var(--white);
+    letter-spacing: -2px;
+    line-height: 1.05;
+  }
+  .header h1 span { color: var(--red); }
+  .header-sub { color: #888; font-size: 14px; margin-top: 14px; }
+  .header-badges { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 22px; justify-content: center; }
+  .badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 5px 14px; border-radius: 20px;
+    font-size: 12px; font-weight: 600; letter-spacing: 0.3px;
+  }
+  .badge-red { background: var(--red); color: white; }
+  .badge-outline { border: 1.5px solid #444; color: #aaa; }
+
+  /* ── TABS ── */
+  .tab-nav {
+    background: var(--dark);
+    border-bottom: 1px solid #2a2a2a;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .tab-nav .wrap {
+    display: flex;
+    gap: 2px;
+    overflow-x: auto;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  .tab-nav .wrap::-webkit-scrollbar { display: none; }
+  .tab-btn {
+    padding: 16px 20px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: #888;
+    border-bottom: 3px solid transparent;
+    white-space: nowrap;
+    letter-spacing: 0.2px;
+    transition: color 0.15s;
+    flex-shrink: 0;
+  }
+  .tab-btn:hover { color: #ccc; }
+  .tab-btn.active { color: var(--white); border-bottom-color: var(--red); }
+
+  /* ── CONTENT ── */
+  .content { padding: 40px 0 80px; }
+  .content .wrap { padding-top: 0; padding-bottom: 0; }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* ── SECTION HEADER ── */
+  .section-header { margin-bottom: 28px; }
+  .section-header h2 {
+    font-size: 32px; font-weight: 800; color: var(--black);
+    letter-spacing: -0.5px; line-height: 1.15;
+  }
+  .section-header h2 .accent { color: var(--red); }
+  .section-header p { font-size: 15px; color: var(--muted); margin-top: 8px; max-width: 620px; }
+  .divider { width: 48px; height: 4px; background: var(--red); border-radius: 2px; margin: 12px 0 16px; }
+
+  /* ── CARDS ── */
+  .card {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 28px 32px;
+    margin-bottom: 18px;
+    border: 1px solid var(--border);
+  }
+  .card-title {
+    font-size: 11px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--red); margin-bottom: 10px;
+  }
+  .card h3 { font-size: 18px; font-weight: 700; color: var(--black); margin-bottom: 12px; }
+  .card p { font-size: 14.5px; color: var(--muted); line-height: 1.7; }
+
+  /* ── GRID ── */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+
+  /* ── LISTS ── */
+  ul, ol { padding-left: 20px; }
+  li { font-size: 14.5px; color: var(--muted); margin-bottom: 8px; line-height: 1.6; }
+  li strong { color: var(--text); }
+
+  /* ── CALLOUTS ── */
+  .callout { padding: 16px 20px; border-radius: 0 10px 10px 0; margin: 16px 0; }
+  .callout-red { background: var(--red-light); border-left: 4px solid var(--red); }
+  .callout-red p { color: #7a0000; font-size: 14px; }
+  .callout-dark { background: #f7f7f7; border-left: 4px solid var(--black); }
+  .callout-dark p { color: var(--muted); font-size: 14px; }
+  .callout-yellow { background: #fffbeb; border-left: 4px solid #f59e0b; }
+  .callout-yellow p { color: #78350f; font-size: 14px; }
+
+  /* ── STAT ROW ── */
+  .stat-row {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1px; background: var(--border); border-radius: 12px;
+    overflow: hidden; margin-bottom: 18px;
+  }
+  .stat { background: var(--white); padding: 24px 28px; }
+  .stat-value { font-size: 32px; font-weight: 800; color: var(--black); letter-spacing: -1px; line-height: 1; }
+  .stat-value .unit { font-size: 18px; color: var(--red); }
+  .stat-label { font-size: 11px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.8px; margin-top: 6px; }
+
+  /* ── TABLE ── */
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th {
+    background: var(--black); color: var(--white); padding: 12px 16px;
+    text-align: left; font-weight: 700; font-size: 11px; letter-spacing: 0.8px; text-transform: uppercase;
+  }
+  td { padding: 12px 16px; border-bottom: 1px solid #f0f0f0; color: var(--muted); vertical-align: top; }
+  td:first-child { font-weight: 600; color: var(--text); }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: #fafafa; }
+  .yes { color: #16a34a; font-weight: 700; }
+  .partial { color: #d97706; font-weight: 600; }
+  .compare-header-shopify { background: var(--red) !important; }
+  .compare-header-bc { background: #333 !important; }
+
+  /* ── FEATURE GRID ── */
+  .feature-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 1px; background: var(--border); border-radius: 12px;
+    overflow: hidden; margin-bottom: 18px;
+  }
+  .feature-item { background: var(--white); padding: 22px 24px; }
+  .feature-icon { font-size: 22px; margin-bottom: 8px; }
+  .feature-title { font-size: 14px; font-weight: 700; color: var(--black); margin-bottom: 6px; }
+  .feature-desc { font-size: 13.5px; color: var(--muted); line-height: 1.55; }
+
+  /* ── WIN ITEMS ── */
+  .win-list { list-style: none; padding: 0; }
+  .win-item {
+    background: var(--white); border: 1px solid var(--border); border-radius: 12px;
+    padding: 22px 28px; margin-bottom: 14px;
+    display: grid; grid-template-columns: 40px 1fr; gap: 16px; align-items: start;
+  }
+  .win-num {
+    width: 36px; height: 36px; background: var(--red); color: white;
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 800; flex-shrink: 0;
+  }
+  .win-body {}
+  .win-title { font-size: 16px; font-weight: 700; color: var(--black); margin-bottom: 5px; }
+  .win-req { font-size: 11px; font-weight: 700; color: var(--red); letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 6px; }
+  .win-desc { font-size: 14px; color: var(--muted); line-height: 1.6; }
+
+  /* ── TIMELINE ── */
+  .timeline { list-style: none; padding: 0; }
+  .timeline li {
+    padding: 18px 0 18px 52px; position: relative;
+    border-left: 2px solid var(--border); margin-left: 16px;
+    cursor: pointer; user-select: none;
+    border-radius: 0 8px 8px 0;
+    transition: background 0.1s;
+  }
+  .timeline li:hover { background: rgba(204,0,0,0.04); }
+  .timeline li:last-child { border-left-color: transparent; }
+  .timeline li::before {
+    content: attr(data-step); position: absolute; left: -18px; top: 18px;
+    width: 32px; height: 32px; background: var(--red); color: white;
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 800;
+    transition: background 0.15s, transform 0.1s;
+  }
+  .timeline li:hover::before { transform: scale(1.1); }
+  .timeline li.done::before { background: #22c55e; color: white; }
+  .timeline li.done h4 { color: var(--muted); }
+  .timeline li h4 { font-size: 15px; font-weight: 700; color: var(--black); margin-bottom: 4px; transition: color 0.15s; }
+  .timeline li p { font-size: 13.5px; color: var(--muted); }
+  .timeline-hint { font-size: 12px; color: #aaa; margin-bottom: 14px; }
+
+  /* ── DATE CHIPS ── */
+  .step-date {
+    display: inline-block;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase;
+    padding: 3px 12px; border-radius: 20px; margin-bottom: 8px;
+    cursor: pointer; border: 1.5px dashed transparent;
+    transition: border-color 0.12s, background 0.12s;
+    min-width: 60px; line-height: 1.6;
+  }
+  .step-date.has-date { color: var(--red); background: var(--red-light); }
+  .step-date.no-date { color: #bbb; background: #f5f5f5; }
+  .step-date:hover { border-color: var(--red); }
+  .step-date.editing {
+    border-style: solid; border-color: var(--red);
+    background: white; color: var(--text);
+    outline: none; cursor: text;
+  }
+
+  /* ── CHIPS ── */
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+  .chip { padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+  .chip-red { background: var(--red-light); color: var(--red-dark); }
+  .chip-dark { background: #f0f0f0; color: #444; }
+
+  /* ── BUTTON ── */
+  .btn-red {
+    display: inline-block; background: var(--red); color: white;
+    padding: 12px 24px; border-radius: 8px; text-decoration: none;
+    font-weight: 700; font-size: 14px; margin-top: 8px;
+  }
+  .btn-red:hover { background: var(--red-dark); text-decoration: none; }
+
+  a { color: var(--red); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .footer { text-align: center; color: #aaa; font-size: 12px; padding: 24px 0 40px; border-top: 1px solid var(--border); margin-top: 20px; }
+
+  @media (max-width: 720px) {
+    .header h1 { font-size: 38px; }
+    .content { padding: 28px 0 60px; }
+    .grid-2, .feature-grid, .stat-row { grid-template-columns: 1fr; }
+    .card { padding: 20px; }
+    .section-header h2 { font-size: 24px; }
+    .win-item { grid-template-columns: 32px 1fr; gap: 12px; padding: 18px 20px; }
+  }
+
+  /* PASSWORD GATE */
+  #pw-gate { position: fixed; inset: 0; background: #0d0d0d; display: flex; align-items: center; justify-content: center; z-index: 9999; }
+  #pw-box { text-align: center; padding: 52px 44px; max-width: 420px; width: 90%; border: 1px solid #2a2a2a; border-radius: 16px; background: #1a1a1a; }
+  .pw-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #CC0000; margin-bottom: 18px; }
+  #pw-box h2 { color: white; font-size: 26px; font-weight: 800; letter-spacing: -0.5px; line-height: 1.15; margin-bottom: 8px; }
+  #pw-box h2 span { color: #CC0000; }
+  .pw-sub { color: #555; font-size: 13px; margin-bottom: 32px; line-height: 1.7; }
+  #pw-input { width: 100%; padding: 13px 16px; border-radius: 8px; border: 1.5px solid #333; background: #111; color: white; font-size: 16px; text-align: center; letter-spacing: 3px; margin-bottom: 12px; outline: none; box-sizing: border-box; }
+  #pw-input:focus { border-color: #CC0000; }
+  #pw-input::placeholder { letter-spacing: 0; color: #444; font-size: 14px; }
+  #pw-submit { width: 100%; padding: 13px; background: #CC0000; color: white; border: none; border-radius: 8px; font-size: 15px; font-weight: 700; cursor: pointer; }
+  #pw-submit:hover { background: #a30000; }
+  #pw-error { color: #CC0000; font-size: 13px; margin-top: 12px; display: none; }
+
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="wrap">
+    <div class="header-eyebrow">Evaluation Hub · May 2026</div>
+    <h1>National Gym Supply<br><span>× Shopify Plus</span></h1>
+    <div class="header-sub">Prepared by Mercedes Boykin-Sabalones · Account Executive, Shopify B2B · For DYODE + NGS Leadership</div>
+    <div class="header-badges">
+      <span class="badge badge-red">✓ Project Approved &amp; Funded</span>
+      <span class="badge badge-outline">Target Launch: Dec 2026</span>
+      <span class="badge badge-outline">Confidential</span>
+    </div>
+  </div>
+</div>
+
+<!-- TABS -->
+<div class="tab-nav">
+  <div class="wrap">
+    <button class="tab-btn active" onclick="show('overview',this)">Overview</button>
+    <button class="tab-btn" onclick="show('wins',this)">Shopify Delivers</button>
+    <button class="tab-btn" onclick="show('b2b',this)">Why Shopify Plus</button>
+    <button class="tab-btn" onclick="show('comparison',this)">Shopify vs BigCommerce</button>
+    <button class="tab-btn" onclick="show('integrations',this)">Integrations</button>
+    <button class="tab-btn" onclick="show('nextsteps',this)">Mutual Action Plan</button>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<div class="content">
+  <div class="wrap">
+
+    <!-- OVERVIEW -->
+    <div id="overview" class="tab-panel active">
+
+      <div class="section-header">
+        <h2>Evaluation <span class="accent">Overview</span></h2>
+        <div class="divider"></div>
+        <p>National Gym Supply is a B2B gym equipment parts supplier undergoing a deliberate, funded replatform to modernize their commerce infrastructure.</p>
+      </div>
+
+      <div class="stat-row">
+        <div class="stat">
+          <div class="stat-value"><span class="unit">$</span>12M</div>
+          <div class="stat-label">NGS Annual Revenue</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value"><span class="unit">$</span>2M</div>
+          <div class="stat-label">Intek Annual Revenue</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">Dec<span class="unit"> '26</span></div>
+          <div class="stat-label">Target Go-Live</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Who They Are</div>
+        <h3>B2B Gym Equipment Parts, Across North America</h3>
+        <p>NGS (founded 1993, acquired by Lomita Capital in 2023) sells over 40,000 replacement parts and accessories to commercial gyms, fitness chains (24 Hour Fitness, LA Fitness), colleges, and home gym owners. Their 10,000+ customer base is 60% B2B and 40% direct consumer — the platform must serve both segments without separate catalog management. Buyers need the exact part for the exact machine; spec-matching is the core of their commerce. Sister brand <strong>Intek Strength</strong> (~$2M, acquired 2025, 55 SKUs, 3,000+ customers, 80% B2B) is also in scope.</p>
+        <div class="chips">
+          <span class="chip chip-red">B2B Primary</span>
+          <span class="chip chip-dark">NGS: 40,000 SKUs · Intek: 55 SKUs</span>
+          <span class="chip chip-dark">NGS: 60% B2B · 40% Consumer</span>
+          <span class="chip chip-dark">Two Sites in Scope</span>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title">Replatform Drivers</div>
+          <ul>
+            <li><strong>Custom .NET platform, 15+ years old</strong> — end-of-life, increasingly difficult to maintain and extend</li>
+            <li>Previous redesign did not launch — product specs and machine-compatibility documentation were absent, causing customer rejection</li>
+            <li>ERP (Everest) is end-of-life — migration to NetSuite planned for 2027</li>
+            <li>New VP of Ecommerce engaged specifically to lead this initiative through completion</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-title">Key Requirements</div>
+          <ul>
+            <li>Modernize the platform without disrupting established B2B purchasing workflows</li>
+            <li>Rich product specs, OEM cross-reference, schematics — the primary failure point of the prior replatform attempt</li>
+            <li>4-tier B2B pricing, net terms, multi-buyer company accounts</li>
+            <li>Modular ERP middleware: Everest now → NetSuite 2027</li>
+            <li>NGS + Intek as separate storefronts under one Shopify Organization</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">The Evaluation</div>
+        <h3>Shopify Plus vs BigCommerce — Guided by DYODE</h3>
+        <p>DYODE is acting as NGS's platform consultant and is conducting a formal evaluation of Shopify Plus and BigCommerce. DYODE's recommendation favors Shopify Plus. The technical requirements document (prepared by DYODE) explicitly identifies Shopify Plus as the preferred platform and documents the rationale.</p>
+        <div class="callout callout-red">
+          <p><strong>This is an approved, funded project.</strong> The initiative is fully resourced and on an active timeline — NGS is targeting go-live ahead of the New Year's 2027 peak season.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Project Team</div>
+        <table>
+          <tr><th>Name</th><th>Role</th><th>Company</th></tr>
+          <tr><td>Tony Meirovitz</td><td>CEO / VP of Ecommerce</td><td>National Gym Supply</td></tr>
+          <tr><td>Brian Chow</td><td>IT Lead / ERP</td><td>National Gym Supply</td></tr>
+          <tr><td>Mike</td><td>Head of Operations</td><td>National Gym Supply</td></tr>
+          <tr><td>Tim Katz</td><td>Co-founder</td><td>DYODE</td></tr>
+          <tr><td>Elana K.</td><td>Director of Operations</td><td>DYODE</td></tr>
+          <tr><td>Mercedes Boykin-Sabalones</td><td>Account Executive, B2B</td><td>Shopify</td></tr>
+          <tr><td>Jordan</td><td>Solutions Engineer</td><td>Shopify</td></tr>
+        </table>
+      </div>
+
+    </div>
+
+    <!-- SHOPIFY DELIVERS -->
+    <div id="wins" class="tab-panel">
+
+      <div class="section-header">
+        <h2>Shopify <span class="accent">Delivers</span></h2>
+        <div class="divider"></div>
+        <p>10 requirements from DYODE's technical specification where Shopify Plus meets or exceeds expectations — natively or with minimal configuration.</p>
+      </div>
+
+      <ul class="win-list">
+
+        <li class="win-item">
+          <div class="win-num">1</div>
+          <div class="win-body">
+            <div class="win-req">FR-ACC + FR-PRC · B2B Accounts & Pricing</div>
+            <div class="win-title">4-Tier Pricing + Company Hierarchy — Native</div>
+            <div class="win-desc">DYODE's doc calls for A/B/C/D customer tiers, per-company price lists, and multi-buyer company accounts with inherited pricing. <strong>Shopify B2B handles all of this natively</strong> — companies, locations, buyers, and catalogs are included with Plus. Tier pricing syncs from ERP via middleware into Shopify B2B Catalogs. No third-party app, no custom code.</div>
+          </div>
+        </li>
+
+        <li class="win-item">
+          <div class="win-num">2</div>
+          <div class="win-body">
+            <div class="win-req">FR-CAT-01–11 · Catalog & Product Data</div>
+            <div class="win-title">Machine Compatibility, OEM Cross-Reference & Schematics via Metaobjects</div>
+            <div class="win-desc">The prior NGS replatform failed because product specs were missing. DYODE's specification requires machine make/model compatibility lists, OEM cross-references, schematic PDFs with clickable callouts, and variant fitment data. NGS's catalog is 40,000 SKUs — the vast majority are simple products, with configurable, bundled, and custom product types isolated to the cable category. <strong>Shopify Metaobjects</strong> handle the structured data layer natively; the cable configurator is the one bespoke component, already scoped as a custom app by DYODE.</div>
+          </div>
+        </li>
+
+        <li class="win-item">
+          <div class="win-num">3</div>
+          <div class="win-body">
+            <div class="win-req">FR-SHIP + FR-PRC-06–09 · Shipping & Discount Logic</div>
+            <div class="win-title">Complex Shipping Calculator + Bulk-Qty Discounts via Shopify Functions</div>
+            <div class="win-desc">DYODE flagged the shipping calculator as "highest-risk subsystem" — dimensional weight, oversize/freight rules, nested-product handling, separately-shipped parts, customer carrier accounts. Plus bulk-qty price breaks (1–9=$X, 10–24=$Y, 25+=$Z) combinable with tier pricing. <strong>Shopify Functions</strong> express all of this in version-controlled, upgrade-safe code. DYODE's own doc lists Shopify Functions as a primary reason to choose Shopify Plus.</div>
+          </div>
+        </li>
+
+        <li class="win-item">
+          <div class="win-num">4</div>
+          <div class="win-body">
+            <div class="win-req">FR-CMS-01–06 · Content & Marketing</div>
+            <div class="win-title">Online Store 2.0 — Marketing Team Self-Serves Without Engineering</div>
+            <div class="win-desc">DYODE explicitly decided <strong>non-headless</strong> for NGS because the marketing team needs section-based CMS control without engineering dependency. Shopify's Online Store 2.0 is exactly this — drag-and-drop sections, scheduled banners, blog/resource library, SEO controls, and redirect maps for legacy OEM cross-reference URLs. DYODE locked this decision in the requirements doc.</div>
+          </div>
+        </li>
+
+        <li class="win-item">
+          <div class="win-num">5</div>
+          <div class="win-body">
+            <div class="win-req">FR-CRT-06–07 · B2B Checkout</div>
+            <div class="win-title">Net Terms, PO Capture & Deferred CC Auth at Checkout — Native</div>
+            <div class="win-desc">DYODE requires net terms at checkout, PO number as a required field for net-terms accounts, Resolve for credit decisioning, ACH for high-value orders, and deferred CC authorization for orders under internal review. <strong>Net terms and PO capture are native Shopify B2B checkout features.</strong> Deferred CC auth is a Shopify Function. Resolve integrates via Shopify's app ecosystem.</div>
+          </div>
+        </li>
+
+        <li class="win-item">
+          <div class="win-num">6</div>
+          <div class="win-body">
+            <div class="win-req">FR-QUO-01–05 · Quoting</div>
+            <div class="win-title">Save-as-Quote / Draft Orders — Core B2B Workflow Covered</div>
+            <div class="win-desc">DYODE requires converting a cart to a quote at any point, manager approval routing, quote expiration with reminders, price-locked quote-to-order conversion, and PDF export. <strong>Shopify B2B Draft Orders</strong> cover the core of this — cart-to-quote, price locking, and order conversion. Manager approval routing and PDF export are buildable on top with Shopify Flow and a lightweight custom app. Additional configuration is required, built on a strong native foundation.</div>
+          </div>
+        </li>
+
+        <li class="win-item">
+          <div class="win-num">7</div>
+          <div class="win-body">
+            <div class="win-req">§ 2.3 Multi-Brand Strategy</div>
+            <div class="win-title">NGS + Intek + Future Brands Under One Shopify Organization</div>
+            <div class="win-desc">DYODE's requirements explicitly call for NGS and Intek as <strong>separate storefronts under one Shopify Organization</strong>, with independent themes, pricing, and content — but a shared middleware layer. Adding a third or fourth brand should not require rebuilding the middleware. Shopify Plus expansion stores do exactly this. One admin login, shared team, separate customer-facing experiences.</div>
+          </div>
+        </li>
+
+        <li class="win-item">
+          <div class="win-num">8</div>
+          <div class="win-body">
+            <div class="win-req">NFR-SEO-01–04 · SEO</div>
+            <div class="win-title">OEM Cross-Reference URL Preservation — Built-In Redirect Infrastructure</div>
+            <div class="win-desc">DYODE flagged SEO as "non-negotiable" given the long-tail of OEM cross-reference pages that drive organic traffic. Requirements: 301 redirect map from legacy URLs, structured data (Product, Offer, Breadcrumb) on all PDPs, XML sitemaps per brand, canonical handling for fitment duplicates. <strong>Shopify handles all of this natively</strong> — bulk redirects, automatic structured data, sitemaps, and canonical URLs are platform-level features.</div>
+          </div>
+        </li>
+
+        <li class="win-item">
+          <div class="win-num">9</div>
+          <div class="win-body">
+            <div class="win-req">NFR-PERF + NFR-REL · Performance & Scale</div>
+            <div class="win-title">500–1,000+ Orders/Day at Peak — Shopify Plus Built for This</div>
+            <div class="win-desc">Site performance was identified as a critical evaluation criterion — the prior redesign was rejected in part due to poor load times. DYODE requires sub-600ms TTFB, under 2.5s LCP mobile, and 99.99% availability. <strong>Shopify Plus's infrastructure, CDN, and edge caching are purpose-built for this scale.</strong> Plus tier comes with higher API rate limits necessary for the integration surface area. Shopify's 99.99% SLA exceeds the requirement directly.</div>
+          </div>
+        </li>
+
+        <li class="win-item">
+          <div class="win-num">10</div>
+          <div class="win-body">
+            <div class="win-req">§ 9 Tech Stack · Integrations</div>
+            <div class="win-title">Klaviyo, GA4/GTM, and Gorgias — Best-in-Class Native Integrations</div>
+            <div class="win-desc">DYODE's tech stack plan calls for Klaviyo (email/retention), GA4 + GTM (analytics, already in place), Google Ads (UTM/conversion tracking preservation), and Gorgias (helpdesk/chat). <strong>Shopify has native, deep integrations with all four.</strong> Klaviyo's Shopify integration is its flagship integration. Gorgias was built specifically for Shopify merchants. No custom connectors needed for any of these.</div>
+          </div>
+        </li>
+
+      </ul>
+
+      <div class="callout callout-dark" style="margin-top: 8px;">
+        <p><strong>Where custom development is required:</strong> The Repair Authorization (RA) module, Cable Configurator, Cash for Course buyback, and Sell Parts bid workflow are bespoke — DYODE's specification identifies these explicitly as custom applications. This is expected for an operation of NGS's complexity. The platform handles all surrounding commerce infrastructure natively.</p>
+      </div>
+
+    </div>
+
+    <!-- WHY SHOPIFY PLUS -->
+    <div id="b2b" class="tab-panel">
+
+      <div class="section-header">
+        <h2>Why <span class="accent">Shopify Plus</span></h2>
+        <div class="divider"></div>
+        <p>B2B commerce built into the platform — not added on. What this means for National Gym Supply's requirements.</p>
+      </div>
+
+      <div class="feature-grid">
+        <div class="feature-item">
+          <div class="feature-icon">🏢</div>
+          <div class="feature-title">Company Accounts</div>
+          <div class="feature-desc">Multiple buyers under one company. Role-based permissions, spend limits, order approvals. NGS's gym, college, and independent dealer groups map directly.</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">💲</div>
+          <div class="feature-title">Net Terms &amp; Custom Pricing</div>
+          <div class="feature-desc">Net 30/60 at checkout — native, no app. Customer-specific price lists. Volume tiers. Credit limits. Everything NGS does with their B2B accounts today.</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">📋</div>
+          <div class="feature-title">Product Specs &amp; Docs</div>
+          <div class="feature-desc">Metaobjects attach any structured data to products — spec sheets, machine compatibility, OEM cross-references, schematic PDFs. The primary gap in NGS's prior replatform attempt, addressed natively in Shopify Plus.</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">🛒</div>
+          <div class="feature-title">B2B + D2C, One Store</div>
+          <div class="feature-desc">Guest checkout for D2C walk-ins. B2B buyers log in to unlock company pricing and net terms. No duplicate catalog management.</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">🏪</div>
+          <div class="feature-title">One Org, Two Stores</div>
+          <div class="feature-desc">NGS + Intek under a single Shopify Organization. One admin login, separate storefronts, shared team. Consistent with the multi-store architecture NGS leadership has previously evaluated.</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">⚙️</div>
+          <div class="feature-title">Shopify Functions</div>
+          <div class="feature-desc">Custom shipping logic, discount rules, deferred CC auth — in version-controlled code. Upgrade-safe, testable. No fragile theme hacks.</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Account Portal — The Open Question</div>
+        <h3>DYODE's Concern, Addressed Directly</h3>
+        <p>DYODE has flagged limitations with Shopify's customer account portal based on recent project experience. Current capabilities:</p>
+        <ul style="margin-top: 12px;">
+          <li><strong>New Customer Accounts</strong> is extensible via UI Extensions — custom portal sections are buildable</li>
+          <li>Native: full order history, reorder, invoice download, B2B company views, account management</li>
+          <li>For highly custom requirements → Storefront API + headless gives unlimited control</li>
+          <li><strong>The specific answer depends on the requirements doc.</strong> This is what Jordan (SE) will address once requirements are finalized.</li>
+        </ul>
+        <div class="callout callout-dark" style="margin-top: 14px;">
+          <p>Requirements alignment with DYODE precedes the merchant introduction — Shopify will present a validated, concrete answer before this topic reaches NGS leadership.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- COMPARISON -->
+    <div id="comparison" class="tab-panel">
+
+      <div class="section-header">
+        <h2>Shopify Plus vs <span class="accent">BigCommerce</span></h2>
+        <div class="divider"></div>
+        <p>A direct comparison across the capabilities that matter most for NGS's B2B commerce requirements.</p>
+      </div>
+
+      <div class="card" style="padding: 0; overflow: hidden;">
+        <table>
+          <tr>
+            <th style="width: 42%;">Feature</th>
+            <th class="compare-header-shopify" style="width: 29%;">Shopify Plus</th>
+            <th class="compare-header-bc" style="width: 29%;">BigCommerce</th>
+          </tr>
+          <tr>
+            <td>Native B2B (company accounts, price lists, net terms)</td>
+            <td class="yes">✓ Built-in</td>
+            <td class="partial">⚠️ B2B Edition add-on</td>
+          </tr>
+          <tr>
+            <td>Custom checkout + shipping logic</td>
+            <td class="yes">✓ Shopify Functions</td>
+            <td class="partial">⚠️ Scripts API (limited)</td>
+          </tr>
+          <tr>
+            <td>Product specs / structured data</td>
+            <td class="yes">✓ Metaobjects (flexible)</td>
+            <td class="yes">✓ Custom fields</td>
+          </tr>
+          <tr>
+            <td>Headless / composable option</td>
+            <td class="yes">✓ Hydrogen + Storefront API</td>
+            <td class="yes">✓ Stencil / headless</td>
+          </tr>
+          <tr>
+            <td>ERP / middleware APIs</td>
+            <td class="yes">✓ GraphQL + REST + Webhooks</td>
+            <td class="yes">✓ REST APIs</td>
+          </tr>
+          <tr>
+            <td>Multi-store, one login</td>
+            <td class="yes">✓ Shopify Organization</td>
+            <td class="yes">✓ Multi-storefront</td>
+          </tr>
+          <tr>
+            <td>Native NetSuite connector (2027)</td>
+            <td class="yes">✓ Oracle-built connector</td>
+            <td class="yes">✓ Native connector</td>
+          </tr>
+          <tr>
+            <td>Global agency / partner ecosystem</td>
+            <td class="yes">✓ Largest in the world</td>
+            <td class="partial">⚠️ Significantly smaller</td>
+          </tr>
+          <tr>
+            <td>Native payment processing (no third-party gateway required)</td>
+            <td class="yes">✓ Shopify Payments — NGS confirmed open</td>
+            <td class="partial">⚠️ Requires third-party gateway</td>
+          </tr>
+          <tr>
+            <td>Accelerated checkout network</td>
+            <td class="yes">✓ Shop Pay — 150M+ enrolled buyers, 15%+ conversion lift</td>
+            <td class="partial">⚠️ No equivalent accelerated checkout network</td>
+          </tr>
+          <tr>
+            <td>Native workflow automation</td>
+            <td class="yes">✓ Shopify Flow — included with Plus, no code required</td>
+            <td class="partial">⚠️ Limited native automation; custom dev or third-party required</td>
+          </tr>
+          <tr>
+            <td>Automated US sales tax compliance</td>
+            <td class="yes">✓ Shopify Tax — included, no third-party needed</td>
+            <td class="partial">⚠️ Requires Avalara or third-party integration</td>
+          </tr>
+          <tr>
+            <td>Built-in fraud protection</td>
+            <td class="yes">✓ Shopify Protect — included for eligible orders</td>
+            <td class="partial">⚠️ Third-party integration required</td>
+          </tr>
+          <tr>
+            <td>Certified developer &amp; agency availability</td>
+            <td class="yes">✓ Largest certified partner network globally</td>
+            <td class="partial">⚠️ Significantly smaller talent pool</td>
+          </tr>
+          <tr>
+            <td>Platform investment &amp; B2B roadmap velocity</td>
+            <td class="yes">✓ Quarterly B2B feature releases (Editions); active investment</td>
+            <td class="partial">⚠️ Slower B2B roadmap; reduced platform investment</td>
+          </tr>
+          <tr>
+            <td>24/7 Plus support + SE team</td>
+            <td class="yes">✓</td>
+            <td class="yes">✓</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="card">
+        <div class="card-title">What the Evaluation Actually Comes Down To</div>
+        <h3>One Question</h3>
+        <p>Can Shopify's account portal extensibility and native B2B feature set meet NGS's specific custom requirements — without a full headless build? DYODE's requirements doc answers most of this affirmatively. The remaining open item is the account portal depth.</p>
+        <div class="callout callout-red" style="margin-top: 14px;">
+          <p><strong>Shopify's Solutions Engineer will provide a validated, specific answer</strong> once the requirements document is finalized. DYODE and Shopify will align first — NGS leadership will receive a clear, substantiated position.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- INTEGRATIONS -->
+    <div id="integrations" class="tab-panel">
+
+      <div class="section-header">
+        <h2>Integration <span class="accent">Strategy</span></h2>
+        <div class="divider"></div>
+        <p>NGS's biggest technical complexity: a two-phase ERP transition that has to be architected into the build from day one.</p>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title">Phase 1 — Launch (2026)</div>
+          <h3>Everest → Shopify</h3>
+          <ul>
+            <li>Current ERP is <strong>Everest</strong> — bespoke, end-of-life, no native Shopify connector</li>
+            <li>Strategy: <strong>custom middleware</strong> built by DYODE, targeting NetSuite API structure so Everest is a fallback, not the target</li>
+            <li>Contingency: if the NetSuite migration timeline extends, operate with manual order and customer exports from Shopify until integration is complete</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-title">Phase 2 — 2027</div>
+          <h3>NetSuite Go-Live</h3>
+          <ul>
+            <li>NGS migrating to <strong>NetSuite in 2027</strong>, after the Shopify launch</li>
+            <li>Intek migrates to NetSuite <strong>first</strong> — NGS follows</li>
+            <li>Middleware is modular: repoint from Everest adapter to NetSuite adapter without redesign</li>
+            <li>Shopify has an Oracle-built native NetSuite connector available for simpler flows (catalog, customer master)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="callout callout-dark" style="margin-bottom: 18px;">
+        <p><strong>Confirmed out of scope:</strong> No CRM integration, no EDI, no loyalty program, no gift cards, no subscriptions, no international requirements. This significantly reduces integration surface area compared to a typical B2B replatform of this size.</p>
+      </div>
+
+      <div class="callout callout-yellow" style="margin-bottom: 18px;">
+        <p>⚠️ <strong>Risk to watch:</strong> DYODE's doc flagged NetSuite API call ceilings as a risk at NGS's order volume (500–1,000+/day peak). The recommendation is a hybrid: native connector for catalog/customer sync, custom middleware for orders, inventory, RA, and returns. Jordan (SE) will validate this approach.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Key Sync Flows</div>
+        <table>
+          <tr><th>Object</th><th>Direction</th><th>Trigger</th></tr>
+          <tr><td>Products + pricing</td><td>ERP → Shopify</td><td>On change + scheduled</td></tr>
+          <tr><td>Inventory</td><td>ERP → Shopify</td><td>Near real-time + cart re-check</td></tr>
+          <tr><td>Customers + tier/credit</td><td>Bidirectional</td><td>On create/update</td></tr>
+          <tr><td>Web orders</td><td>Shopify → ERP</td><td>On order create webhook</td></tr>
+          <tr><td>Phone/off-site orders</td><td>ERP → Shopify</td><td>So customers see full history</td></tr>
+          <tr><td>Repairs (RA)</td><td>Bidirectional</td><td>Status machine events</td></tr>
+          <tr><td>Buybacks / Sell Parts</td><td>Shopify → ERP</td><td>Credit + inventory events</td></tr>
+        </table>
+      </div>
+
+    </div>
+
+    <!-- NEXT STEPS -->
+    <div id="nextsteps" class="tab-panel">
+
+      <div class="section-header">
+        <h2>Mutual <span class="accent">Action Plan</span></h2>
+        <div class="divider"></div>
+        <p>Shared timeline from first call to go-live. NGS × DYODE × Shopify — everyone aligned on what happens when.</p>
+      </div>
+
+      <div class="card" style="padding: 28px 32px 32px;">
+        <p class="timeline-hint">Click a date to edit it &nbsp;·&nbsp; Click a step to mark it complete</p>
+        <ul class="timeline">
+          <li class="done" data-step="✓" data-original-step="1" onclick="toggleStep(this)">
+            <span class="step-date has-date" onclick="editDate(event,this)" data-idx="0">May 5, 2026</span>
+            <h4>Intro Call with DYODE</h4>
+            <p>Tim Katz + Elana K. (DYODE). Both NGS + Intek confirmed in scope. ERP complexity and key requirements surfaced.</p>
+          </li>
+          <li data-step="2" onclick="toggleStep(this)">
+            <span class="step-date has-date" onclick="editDate(event,this)" data-idx="1">May 15, 2026</span>
+            <h4>Discovery &amp; Requirements Call with DYODE</h4>
+            <p>Deep-dive on finalized requirements doc. Jordan (SE) joins. Concrete answers on account portal, shipping calculator, and ERP middleware before NGS enters the room.</p>
+          </li>
+          <li data-step="3" onclick="toggleStep(this)">
+            <span class="step-date no-date" onclick="editDate(event,this)" data-idx="2">Set date</span>
+            <h4>Merchant Discovery Call — National Gym Supply</h4>
+            <p>First call with Tony, Brian Chow (IT), and Mike (Ops). Validate requirements, demonstrate platform confidence, walk through custom module approach.</p>
+          </li>
+          <li data-step="4" onclick="toggleStep(this)">
+            <span class="step-date no-date" onclick="editDate(event,this)" data-idx="3">Set date</span>
+            <h4>Technical Discovery Call</h4>
+            <p>Deep-dive with NGS IT and DYODE on ERP integration architecture, middleware design, data migration scope, and custom module requirements.</p>
+          </li>
+          <li data-step="5" onclick="toggleStep(this)">
+            <span class="step-date no-date" onclick="editDate(event,this)" data-idx="4">Set date</span>
+            <h4>B2B Platform Demo Call</h4>
+            <p>Live Shopify B2B demo tailored to NGS — company accounts, net terms, catalog tiers, and product spec experience. Decision-maker attendance confirmed.</p>
+          </li>
+          <li data-step="6" onclick="toggleStep(this)">
+            <span class="step-date no-date" onclick="editDate(event,this)" data-idx="5">Set date</span>
+            <h4>Commercial Proposal Delivered</h4>
+            <p>Shopify Plus contract and pricing delivered to NGS leadership. Scope covers NGS + Intek as expansion stores under one Shopify Organization.</p>
+          </li>
+          <li data-step="7" onclick="toggleStep(this)">
+            <span class="step-date no-date" onclick="editDate(event,this)" data-idx="6">Set date</span>
+            <h4>Technical Scoping</h4>
+            <p>DYODE finalizes build scope, custom module estimates, and ERP middleware architecture. Jordan validates technical approach before build begins.</p>
+          </li>
+          <li data-step="8" onclick="toggleStep(this)">
+            <span class="step-date has-date" onclick="editDate(event,this)" data-idx="7">Aug 2026</span>
+            <h4>Start Trial Store</h4>
+            <p>NGS on Shopify Plus — storefront setup, B2B configuration, and dev environment stood up. Build phase begins in earnest.</p>
+          </li>
+          <li data-step="9" onclick="toggleStep(this)">
+            <span class="step-date has-date" onclick="editDate(event,this)" data-idx="8">Aug 2026</span>
+            <h4>Letter of Intent</h4>
+            <p>LOI executed. Commercial terms confirmed, project timeline locked, and both parties committed to the go-live window.</p>
+          </li>
+          <li data-step="10" onclick="toggleStep(this)">
+            <span class="step-date has-date" onclick="editDate(event,this)" data-idx="9">Sep 30, 2026</span>
+            <h4>Contract Signed</h4>
+            <p>Full contract executed. Shopify Plus fully provisioned and build sprint in progress.</p>
+          </li>
+          <li data-step="11" onclick="toggleStep(this)">
+            <span class="step-date no-date" onclick="editDate(event,this)" data-idx="10">Set date</span>
+            <h4>Shopify Plus Store Provisioned</h4>
+            <p>NGS and Intek stores live under one Shopify Organization. Team access, domain config, and development workflows fully established.</p>
+          </li>
+          <li data-step="12" onclick="toggleStep(this)">
+            <span class="step-date no-date" onclick="editDate(event,this)" data-idx="11">Set date</span>
+            <h4>B2B Catalogue &amp; Pricing Configured</h4>
+            <p>A/B/C/D tier catalogs live. Company accounts, net terms, and buyer permissions configured. ERP middleware syncing products, inventory, and customer data.</p>
+          </li>
+          <li data-step="13" onclick="toggleStep(this)">
+            <span class="step-date no-date" onclick="editDate(event,this)" data-idx="12">Set date</span>
+            <h4>Custom Migration</h4>
+            <p>Full data migration: product catalog, customer accounts, order history, and OEM cross-reference URL redirects. QA and load testing completed.</p>
+          </li>
+          <li data-step="14" onclick="toggleStep(this)">
+            <span class="step-date has-date" onclick="editDate(event,this)" data-idx="13">Nov 2026</span>
+            <h4>Go Live — Website Cutover</h4>
+            <p>Current site goes dark. NGS.com and Intek launch on Shopify Plus — ahead of the New Year's resolution season spike.</p>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Open Questions</div>
+        <ul>
+          <li><strong>Account portal:</strong> Depth of customization needed — Jordan to assess against DYODE's requirements</li>
+          <li><strong>NetSuite timeline:</strong> Tony's hunch is NGS slips to 2027 — middleware "no ERP" mode contingency needs to be confirmed as viable</li>
+          <li><strong>Cable Configurator:</strong> DYODE recommends phasing post-launch. NGS needs to confirm this is acceptable</li>
+          <li><strong>Shipping calculator:</strong> Deep-dive with Mike (Ops) needed early — flagged as highest-risk subsystem</li>
+          <li><strong>Order history migration:</strong> Full history vs. last-N-years vs. on-demand from ERP — decision required</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Your Shopify Team</div>
+        <table>
+          <tr><th>Name</th><th>Role</th><th>Contact</th></tr>
+          <tr><td>Mercedes Boykin-Sabalones</td><td>Account Executive, B2B</td><td>mercedes.boykin-sabalones@shopify.com</td></tr>
+          <tr><td>Jordan</td><td>Solutions Engineer</td><td>Shopify</td></tr>
+        </table>
+        <div style="margin-top: 20px;">
+          <a href="mailto:mercedes.boykin-sabalones@shopify.com" class="btn-red">Email Mercedes →</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Resources</div>
+        <ul>
+          <li><a href="https://help.shopify.com/en/manual/b2b" target="_blank">Shopify B2B Overview →</a></li>
+          <li><a href="https://help.shopify.com/en/manual/b2b/companies" target="_blank">Company Accounts Setup →</a></li>
+          <li><a href="https://shopify.dev/docs/api/admin-graphql" target="_blank">Admin GraphQL API Docs →</a></li>
+          <li><a href="https://shopify.dev/docs/storefronts/headless" target="_blank">Headless Commerce (Hydrogen) →</a></li>
+          <li><a href="https://apps.shopify.com/oracle-netsuite-connector" target="_blank">NetSuite Connector for Shopify →</a></li>
+          <li><a href="https://www.shopify.com/plus/solutions/b2b-ecommerce" target="_blank">Shopify B2B for Enterprise →</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+  </div><!-- /wrap -->
+</div><!-- /content -->
+
+<div class="wrap">
+  <div class="footer">
+    Prepared by Shopify · National Gym Supply Platform Evaluation · May 2026 · Confidential
+  </div>
+</div>
+
+<script>
+function show(id, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+
+function toggleStep(el) {
+  const orig = el.getAttribute('data-original-step') || el.getAttribute('data-step');
+  if (el.classList.contains('done')) {
+    el.classList.remove('done');
+    el.setAttribute('data-step', orig);
+    el.removeAttribute('data-original-step');
+  } else {
+    el.setAttribute('data-original-step', orig);
+    el.setAttribute('data-step', '✓');
+    el.classList.add('done');
+  }
+  saveProgress();
+}
+
+function editDate(e, el) {
+  e.stopPropagation();
+  if (el.contentEditable === 'true') return;
+  el.contentEditable = 'true';
+  el.classList.add('editing');
+  if (el.textContent.trim() === 'Set date') el.textContent = '';
+  el.focus();
+  const sel = window.getSelection();
+  const range = document.createRange();
+  range.selectNodeContents(el);
+  sel.removeAllRanges();
+  sel.addRange(range);
+
+  const finish = () => {
+    el.contentEditable = 'false';
+    el.classList.remove('editing');
+    const text = el.textContent.trim();
+    if (!text) {
+      el.textContent = 'Set date';
+      el.classList.remove('has-date');
+      el.classList.add('no-date');
+    } else {
+      el.classList.add('has-date');
+      el.classList.remove('no-date');
+    }
+    saveDates();
+  };
+
+  el.addEventListener('blur', finish, { once: true });
+  el.addEventListener('keydown', function handler(ev) {
+    if (ev.key === 'Enter' || ev.key === 'Escape') {
+      ev.preventDefault();
+      el.removeEventListener('keydown', handler);
+      el.blur();
+    }
+  });
+}
+
+function saveProgress() {
+  const done = [];
+  document.querySelectorAll('.timeline li').forEach((li, i) => {
+    if (li.classList.contains('done')) done.push(i);
+  });
+  localStorage.setItem('ngs-map-progress', JSON.stringify(done));
+}
+
+function saveDates() {
+  const dates = {};
+  document.querySelectorAll('.timeline .step-date').forEach(el => {
+    const idx = el.getAttribute('data-idx');
+    const text = el.textContent.trim();
+    if (text && text !== 'Set date') dates[idx] = text;
+  });
+  localStorage.setItem('ngs-map-dates', JSON.stringify(dates));
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  const savedDates = localStorage.getItem('ngs-map-dates');
+  if (savedDates) {
+    const dates = JSON.parse(savedDates);
+    document.querySelectorAll('.timeline .step-date').forEach(el => {
+      const idx = el.getAttribute('data-idx');
+      if (dates[idx]) {
+        el.textContent = dates[idx];
+        el.classList.add('has-date');
+        el.classList.remove('no-date');
+      }
+    });
+  }
+
+  const savedProgress = localStorage.getItem('ngs-map-progress');
+  if (savedProgress) {
+    const doneIndices = JSON.parse(savedProgress);
+    document.querySelectorAll('.timeline li').forEach((li, i) => {
+      const isDone = doneIndices.includes(i);
+      const isAlreadyDone = li.classList.contains('done');
+      if (isDone && !isAlreadyDone) {
+        const orig = li.getAttribute('data-step');
+        li.setAttribute('data-original-step', orig);
+        li.setAttribute('data-step', '✓');
+        li.classList.add('done');
+      } else if (!isDone && isAlreadyDone) {
+        const orig = li.getAttribute('data-original-step') || li.getAttribute('data-step');
+        li.classList.remove('done');
+        li.setAttribute('data-step', orig);
+        li.removeAttribute('data-original-step');
+      }
+    });
+  }
+});
+
+(function() {
+  if (sessionStorage.getItem('ngs-auth') === '1') {
+    var g = document.getElementById('pw-gate');
+    if (g) g.style.display = 'none';
+  }
+})();
+function checkPw() {
+  if (document.getElementById('pw-input').value === 'NGS2026') {
+    document.getElementById('pw-gate').style.display = 'none';
+    sessionStorage.setItem('ngs-auth', '1');
+  } else {
+    document.getElementById('pw-error').style.display = 'block';
+    document.getElementById('pw-input').value = '';
+    document.getElementById('pw-input').focus();
+  }
+}
+window.addEventListener('DOMContentLoaded', function() {
+  var inp = document.getElementById('pw-input');
+  if (inp) inp.addEventListener('keydown', function(e) { if (e.key === 'Enter') checkPw(); });
+});
+
+</script>
+
+<div id="pw-gate">
+  <div id="pw-box">
+    <div class="pw-eyebrow">Evaluation Hub &middot; Confidential</div>
+    <h2>National Gym Supply<br><span>&times; Shopify Plus</span></h2>
+    <p class="pw-sub">This document is confidential and intended<br>for authorized recipients only.</p>
+    <input id="pw-input" type="password" placeholder="Enter access code" autocomplete="off">
+    <button id="pw-submit" onclick="checkPw()">Access Document &rarr;</button>
+    <p id="pw-error">Incorrect access code. Please try again.</p>
+  </div>
+</div>
+
+</body>
+</html>
