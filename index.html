@@ -282,22 +282,6 @@
     .section-header h2 { font-size: 24px; }
     .win-item { grid-template-columns: 32px 1fr; gap: 12px; padding: 18px 20px; }
   }
-
-  /* EMAIL GATE */
-  #gate { position: fixed; inset: 0; background: #0a0a0a; display: flex; align-items: center; justify-content: center; z-index: 9999; }
-  #gate-box { text-align: center; padding: 52px 44px; max-width: 420px; width: 90%; border: 1px solid #2a2a2a; border-radius: 16px; background: #141414; }
-  .gate-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #CC0000; margin-bottom: 18px; }
-  #gate-box h2 { color: #fff; font-size: 26px; font-weight: 800; letter-spacing: -0.5px; line-height: 1.2; margin-bottom: 8px; }
-  #gate-box h2 span { color: #CC0000; }
-  #gate-box p { color: #555; font-size: 13px; margin-bottom: 28px; line-height: 1.7; }
-  #gate-email { width: 100%; padding: 13px 16px; border-radius: 8px; border: 1.5px solid #2e2e2e; background: #0d0d0d; color: #fff; font-size: 15px; text-align: center; outline: none; box-sizing: border-box; transition: border-color .2s; }
-  #gate-email:focus { border-color: #CC0000; }
-  #gate-email::placeholder { color: #444; font-size: 14px; }
-  #gate-btn { width: 100%; padding: 13px; background: #CC0000; color: #fff; border: none; border-radius: 8px; font-size: 15px; font-weight: 700; cursor: pointer; margin-top: 10px; transition: background .15s; }
-  #gate-btn:hover { background: #a30000; }
-  #gate-btn:disabled { opacity: .6; cursor: default; }
-  #gate-error { color: #CC0000; font-size: 13px; margin-top: 12px; display: none; }
-  #gate-fine { color: #333; font-size: 11px; margin-top: 18px; }
 </style>
 </head>
 <body>
@@ -785,23 +769,23 @@
           </li>
           <li data-step="7" onclick="toggleStep(this)">
             <span class="step-date no-date" onclick="editDate(event,this)" data-idx="6">Set date</span>
-            <h4>Technical Scoping</h4>
-            <p>DYODE finalizes build scope, custom module estimates, and flat file integration architecture. Shopify SE validates technical approach before build begins.</p>
-          </li>
-          <li data-step="8" onclick="toggleStep(this)">
-            <span class="step-date no-date" onclick="editDate(event,this)" data-idx="7">Set date</span>
-            <h4>Start Trial Store</h4>
-            <p>NGS on Shopify Plus — storefront setup, B2B configuration, and dev environment stood up. Build phase begins in earnest.</p>
-          </li>
-          <li data-step="9" onclick="toggleStep(this)">
-            <span class="step-date no-date" onclick="editDate(event,this)" data-idx="8">Set date</span>
             <h4>Letter of Intent</h4>
             <p>LOI executed. Commercial terms confirmed, project timeline locked, and both parties committed to the go-live window.</p>
           </li>
-          <li data-step="10" onclick="toggleStep(this)">
-            <span class="step-date no-date" onclick="editDate(event,this)" data-idx="9">Set date</span>
+          <li data-step="8" onclick="toggleStep(this)">
+            <span class="step-date no-date" onclick="editDate(event,this)" data-idx="7">Set date</span>
             <h4>Contract Signed</h4>
             <p>Full contract executed. Shopify Plus fully provisioned and build sprint in progress.</p>
+          </li>
+          <li data-step="9" onclick="toggleStep(this)">
+            <span class="step-date no-date" onclick="editDate(event,this)" data-idx="8">Set date</span>
+            <h4>Technical Scoping</h4>
+            <p>DYODE finalizes build scope, custom module estimates, and flat file integration architecture. Shopify SE validates technical approach before build begins.</p>
+          </li>
+          <li data-step="10" onclick="toggleStep(this)">
+            <span class="step-date no-date" onclick="editDate(event,this)" data-idx="9">Set date</span>
+            <h4>Start Trial Store</h4>
+            <p>NGS on Shopify Plus — storefront setup, B2B configuration, and dev environment stood up. Build phase begins in earnest.</p>
           </li>
           <li data-step="11" onclick="toggleStep(this)">
             <span class="step-date no-date" onclick="editDate(event,this)" data-idx="10">Set date</span>
@@ -1002,7 +986,6 @@ window.addEventListener('DOMContentLoaded', () => {
   #gate-error { color: #CC0000; font-size: 13px; margin-top: 12px; display: none; }
   #gate-fine { color: #333; font-size: 11px; margin-top: 18px; }
 </style>
-
 <script>
 (function() { if (sessionStorage.getItem('ngs-access') === '1') document.getElementById('gate').style.display = 'none'; })();
 function submitGate() {
@@ -1020,7 +1003,6 @@ document.addEventListener('DOMContentLoaded', function() {
   if (inp) inp.addEventListener('keydown', function(e) { if (e.key === 'Enter') submitGate(); });
 });
 </script>
-
 <div id="gate">
   <div id="gate-box">
     <div class="gate-eyebrow">Evaluation Hub &middot; Confidential</div>
@@ -1032,6 +1014,5 @@ document.addEventListener('DOMContentLoaded', function() {
     <p id="gate-fine">This document contains confidential information intended for authorized recipients only.</p>
   </div>
 </div>
-
 </body>
 </html>
