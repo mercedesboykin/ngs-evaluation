@@ -343,7 +343,7 @@
       <div class="card">
         <div class="card-title">Who They Are</div>
         <h3>B2B Gym Equipment Parts, Across North America</h3>
-        <p>NGS (founded 1993, acquired by Lomita Capital in 2023) sells over 40,000 replacement parts and accessories to commercial gyms, fitness chains (24 Hour Fitness, LA Fitness), colleges, and home gym owners. Their 10,000+ customer base is 60% B2B and 40% direct consumer — the platform must serve both segments without separate catalog management. Buyers need the exact part for the exact machine; spec-matching is the core of their commerce. Sister brand <strong>Intek Strength</strong> (~$2M, acquired 2025, 55 SKUs, 3,000+ customers, 80% B2B) is also in scope.</p>
+        <p>NGS (founded 1993, acquired by Lomita Capital in 2023) sells over 40,000 replacement parts and accessories to commercial gyms, fitness chains (24 Hour Fitness, LA Fitness), colleges, and home gym owners. Their 10,000+ customer base is 60% B2B and 40% direct consumer — the platform must serve both segments without separate catalog management. Buyers need the exact part for the exact machine; spec-matching is the core of their commerce. Sister brand <strong>Intek Strength</strong> (~$2M, acquired 2025, 55 SKUs, 3,000+ customers, 80% B2B) is also in scope. NGS processes <strong>300–400 orders per day</strong> across web, phone, and PO channels. The plan is a <strong>soft launch end of 2026</strong> with tenured customers to validate the experience — followed by a full relaunch in early 2027 with a broader digital marketing strategy.</p>
         <div class="chips">
           <span class="chip chip-red">B2B Primary</span>
           <span class="chip chip-dark">NGS: 40,000 SKUs · Intek: 55 SKUs</span>
@@ -357,7 +357,7 @@
           <div class="card-title">Replatform Drivers</div>
           <ul>
             <li><strong>Custom .NET platform, 15+ years old</strong> — end-of-life, increasingly difficult to maintain and extend</li>
-            <li>Previous redesign did not launch — product specs and machine-compatibility documentation were absent, causing customer rejection</li>
+            <li>Previous $250K+ redesign was soft-launched but immediately rejected by tenured customers — broken parts search, wrong machine associations, non-functional services, and payment failures. Poor execution, not a platform issue.</li>
             <li>ERP (Everest) is end-of-life — migration to NetSuite planned for 2027</li>
             <li>New VP of Ecommerce engaged specifically to lead this initiative through completion</li>
           </ul>
@@ -388,10 +388,13 @@
         <table>
           <tr><th>Name</th><th>Role</th><th>Company</th></tr>
           <tr><td>Tony Meirovitz</td><td>VP of Ecommerce</td><td>National Gym Supply</td></tr>
+          <tr><td>Vince Smith</td><td>Interim CEO / Chairman of the Board</td><td>National Gym Supply</td></tr>
+          <tr><td>Mike Montoy</td><td>Head of Operations</td><td>National Gym Supply</td></tr>
           <tr><td>Brian</td><td>IT Lead / ERP</td><td>National Gym Supply</td></tr>
-          <tr><td>Mike</td><td>Head of Operations</td><td>National Gym Supply</td></tr>
           <tr><td>Tim Katz</td><td>Co-founder</td><td>DYODE</td></tr>
-          <tr><td>Elana K.</td><td>Director of Operations</td><td>DYODE</td></tr>
+          <tr><td>Elana K.</td><td>Director of Operations &amp; Product Management</td><td>DYODE</td></tr>
+          <tr><td>Paul</td><td>Senior Developer / Solution Architect</td><td>DYODE</td></tr>
+          <tr><td>Kevin Stites</td><td>Director of Web Development</td><td>DYODE</td></tr>
           <tr><td>Mercedes Boykin-Sabalones</td><td>Account Executive, B2B</td><td>Shopify</td></tr>
           <tr><td>Jordan Murphy</td><td>Solutions Engineer</td><td>Shopify</td></tr>
         </table>
@@ -405,7 +408,7 @@
       <div class="section-header">
         <h2>Shopify <span class="accent">Delivers</span></h2>
         <div class="divider"></div>
-        <p>10 requirements from DYODE's technical specification where Shopify Plus meets or exceeds expectations — natively or with minimal configuration.</p>
+        <p>12 requirements from DYODE's technical specification and the May 20 discovery call where Shopify Plus meets or exceeds expectations — natively or with minimal configuration.</p>
       </div>
 
       <ul class="win-list">
@@ -433,7 +436,7 @@
           <div class="win-body">
             <div class="win-req">FR-SHIP + FR-PRC-06–09 · Shipping & Discount Logic</div>
             <div class="win-title">Complex Shipping Calculator + Bulk-Qty Discounts via Shopify Functions</div>
-            <div class="win-desc">The shipping calculator is the highest-risk subsystem in scope — dimensional weight, oversize/freight rules, nested-product handling, separately-shipped parts, and customer carrier accounts. NGS also requires bulk-qty price breaks (1–9=$X, 10–24=$Y, 25+=$Z) combinable with tier pricing. <strong>Shopify Functions</strong> express all of this in version-controlled, upgrade-safe code — and are a primary technical reason to choose Shopify Plus.</div>
+            <div class="win-desc">The shipping calculator is the highest-risk subsystem in scope — dimensional weight, oversize/freight rules, nested-product handling, separately-shipped parts, and customer carrier accounts. Critically, NGS ships from <strong>two warehouse locations</strong> (LA for electronics repairs, Illinois for general parts) — customers currently see two separate shipping line items and can't order from both locations in one transaction. The new site must consolidate into a single shipping charge. DYODE has already scoped this and treats it as low-hanging fruit. NGS also requires bulk-qty price breaks combinable with tier pricing. <strong>Shopify Functions</strong> express all of this in version-controlled, upgrade-safe code.</div>
           </div>
         </li>
 
@@ -486,8 +489,8 @@
           <div class="win-num">9</div>
           <div class="win-body">
             <div class="win-req">NFR-PERF + NFR-REL · Performance & Scale</div>
-            <div class="win-title">500–1,000+ Orders/Day at Peak — Shopify Plus Built for This</div>
-            <div class="win-desc">Site performance is a critical requirement — the prior redesign was rejected in part due to poor load times. NGS requires sub-600ms TTFB, under 2.5s LCP mobile, and 99.99% availability. <strong>Shopify Plus's infrastructure, CDN, and edge caching are purpose-built for this scale.</strong> Plus tier comes with higher API rate limits necessary for the integration surface area. Shopify's 99.99% SLA exceeds the requirement directly.</div>
+            <div class="win-title">300–400 Orders/Day — Shopify Plus Built for This and More</div>
+            <div class="win-desc">Site performance is a critical requirement — the prior redesign failed in part due to the current site making <strong>700+ real-time API calls to the ERP on every part lookup</strong>, creating extreme lag. The fix: store everything in Shopify (using it as a PIM), eliminating real-time ERP dependency for catalog browsing. The ERP is only called when needed (e.g. shipping calculations). <strong>Shopify Plus's infrastructure, CDN, and edge caching handle NGS's 300–400 daily orders at peak with headroom to grow.</strong> Plus tier comes with higher API rate limits necessary for the integration surface area. Shopify's 99.99% SLA exceeds the requirement directly.</div>
           </div>
         </li>
 
@@ -497,6 +500,24 @@
             <div class="win-req">§ 9 Tech Stack · Integrations</div>
             <div class="win-title">Klaviyo, GA4/GTM, and Gorgias — Best-in-Class Native Integrations</div>
             <div class="win-desc">DYODE's tech stack plan calls for Klaviyo (email/retention), GA4 + GTM (analytics, already in place), Google Ads (UTM/conversion tracking preservation), and Gorgias (helpdesk/chat). <strong>Shopify has native, deep integrations with all four.</strong> Klaviyo's Shopify integration is its flagship integration. Gorgias was built specifically for Shopify merchants. No custom connectors needed for any of these.</div>
+          </div>
+        </li>
+
+        <li class="win-item">
+          <div class="win-num">11</div>
+          <div class="win-body">
+            <div class="win-req">Tony's #1 Priority · Search</div>
+            <div class="win-title">Shopify Search &amp; Discovery — AI-Powered, Serial Number Ready</div>
+            <div class="win-desc">Tony identified search as the most critical tech stack component. Key NGS challenges: serial numbers that share the same first 3–4 characters, and part numbers where customers type "O" (letter) instead of "0" (zero) — both causing failed searches. <strong>Shopify's native search and discovery platform</strong> has evolved significantly (confirmed by Jordan) and is the starting point — it handles AI-powered ranking, synonyms, and fuzzy matching. If needed, third-party solutions like Algolia can be added later with minimal friction. Starting native avoids the cost and complexity Tony experienced with SearchSpring at a previous company.</div>
+          </div>
+        </li>
+
+        <li class="win-item">
+          <div class="win-num">12</div>
+          <div class="win-body">
+            <div class="win-req">Future-Proofing · Agentic Commerce</div>
+            <div class="win-title">Universal Commerce Protocol — NGS Catalog Visible to AI Agents</div>
+            <div class="win-desc">Jordan confirmed that <strong>Shopify helped define the Universal Commerce Protocol</strong> alongside OpenAI and Google — the framework that governs how AI agents and LLMs reference commerce data and transact. For NGS, a highly SKU-intensive B2B business that relies heavily on organic discovery, this is a significant advantage: their full catalog becomes automatically visible to AI agents as a feature you simply turn on. No custom implementation required. This positions NGS ahead of competitors in the fitness parts space, none of whom have adopted this yet.</div>
           </div>
         </li>
 
@@ -705,8 +726,8 @@
         <p><strong>Confirmed out of scope:</strong> No CRM integration, no EDI, no loyalty program, no gift cards, no subscriptions, no international requirements. This significantly reduces integration surface area compared to a typical B2B replatform of this size.</p>
       </div>
 
-      <div class="callout callout-yellow" style="margin-bottom: 18px;">
-        <p>⚠️ <strong>To confirm in technical discovery:</strong> Final flat file format, sync cadence, and fallback handling for inventory and order data. Scope and architecture to be validated on the May 20 technical discovery call.</p>
+      <div class="callout callout-dark" style="margin-bottom: 18px;">
+        <p>✓ <strong>Confirmed May 20:</strong> Inventory syncs via flat file every 10–15 minutes — Tony confirmed this frequency is sufficient, as inventory doesn't vary significantly and multiple offline channels share the same pool. Final flat file format and order sync cadence to be confirmed with Brian (IT Lead) in technical scoping.</p>
       </div>
 
       <div class="card">
@@ -714,7 +735,7 @@
         <table>
           <tr><th>Object</th><th>Direction</th><th>Trigger</th></tr>
           <tr><td>Products + pricing</td><td>ERP → Shopify</td><td>On change + scheduled</td></tr>
-          <tr><td>Inventory</td><td>ERP → Shopify</td><td>Near real-time + cart re-check</td></tr>
+          <tr><td>Inventory</td><td>ERP → Shopify</td><td>Every 10–15 min flat file (confirmed)</td></tr>
           <tr><td>Customers + tier/credit</td><td>Bidirectional</td><td>On create/update</td></tr>
           <tr><td>Web orders</td><td>Shopify → ERP</td><td>On order create webhook</td></tr>
           <tr><td>Phone/off-site orders</td><td>ERP → Shopify</td><td>So customers see full history</td></tr>
@@ -747,10 +768,10 @@
             <h4>Discovery &amp; Requirements Alignment with DYODE</h4>
             <p>ERP strategy confirmed: flat file approach at launch. Timeline accelerated — build start targeting June/July. DYODE team aligned and ready to move forward.</p>
           </li>
-          <li data-step="3" onclick="toggleStep(this)">
+          <li class="done" data-step="✓" data-original-step="3" onclick="toggleStep(this)">
             <span class="step-date has-date" onclick="editDate(event,this)" data-idx="2">May 20, 2026</span>
             <h4>Intro + Technical Discovery Call — National Gym Supply</h4>
-            <p>First call with Tony and the NGS team. Brief intro followed by a deep-dive on requirements, open questions, and platform capabilities. Evaluation hub shared with NGS in advance.</p>
+            <p>Full team assembled: Tony, Vince (Interim CEO), Mike (Ops), Jordan + Mercedes (Shopify), and full DYODE team. Confirmed: flat file ERP approach, 300–400 orders/day, soft launch end 2026 → full relaunch early 2027, search as #1 priority, shipping from two warehouses to consolidate, inventory sync every 10–15 min. Jordan confirmed 80% of requirements covered natively by Shopify. Next step: schedule follow-up with DYODE for broader team demo.</p>
           </li>
           <li data-step="4" onclick="toggleStep(this)">
             <span class="step-date no-date" onclick="editDate(event,this)" data-idx="3">Set date</span>
@@ -813,11 +834,14 @@
       <div class="card">
         <div class="card-title">Open Questions</div>
         <ul>
-          <li><strong>Account portal:</strong> Unique branded portal experience per company confirmed as a requirement — depth of customization to be scoped on the May 20 technical discovery call</li>
-          <li><strong>NetSuite timeline:</strong> Tony's hunch is NGS slips to 2027 — middleware "no ERP" mode contingency needs to be confirmed as viable</li>
-          <li><strong>Cable Configurator:</strong> DYODE recommends phasing post-launch. NGS needs to confirm this is acceptable</li>
-          <li><strong>Shipping calculator:</strong> Deep-dive with Mike (Ops) needed early — flagged as highest-risk subsystem</li>
+          <li><strong>Broader team demo:</strong> Jordan + Mercedes to connect with DYODE (Tim/Elana) and schedule demo for the full NGS team — this is the agreed next action from May 20</li>
+          <li><strong>Contract review timeline:</strong> Mercedes mentioned sending contracts for legal review on May 20 — confirm receipt and Vince's review process</li>
+          <li><strong>Flat file format:</strong> Exact format, field mapping, and fallback handling with Brian (IT Lead) — to be confirmed in technical scoping</li>
+          <li><strong>Freight / LTL shipping:</strong> NGS plans to add Intek products requiring freight shipping — real-time freight rate calculations needed at checkout. Brian was working on this; scope and timeline TBD</li>
+          <li><strong>AI-powered PO import:</strong> On Tony's wish list — customer service team manually keys in 75–100 line POs from enterprise accounts (24 Hour Fitness, LA Fitness). Not for launch, but to scope for Phase 2</li>
+          <li><strong>Old mothballed site:</strong> Still being indexed by Google and redirecting customers incorrectly — Tony said this is being remedied immediately; confirm status</li>
           <li><strong>Order history migration:</strong> Full history vs. last-N-years vs. on-demand from ERP — decision required</li>
+          <li><strong>Cable Configurator:</strong> DYODE recommends phasing post-launch. NGS needs to confirm this is acceptable</li>
         </ul>
       </div>
 
@@ -971,45 +995,62 @@ window.addEventListener('DOMContentLoaded', () => {
 </script>
 
 <style>
-  #gate { position: fixed; inset: 0; background: #0a0a0a; display: flex; align-items: center; justify-content: center; z-index: 9999; }
-  #gate-box { text-align: center; padding: 52px 44px; max-width: 420px; width: 90%; border: 1px solid #2a2a2a; border-radius: 16px; background: #141414; }
-  .gate-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #CC0000; margin-bottom: 18px; }
-  #gate-box h2 { color: #fff; font-size: 26px; font-weight: 800; letter-spacing: -0.5px; line-height: 1.2; margin-bottom: 8px; }
+  #gate {
+    position: fixed; inset: 0; background: #0a0a0a;
+    display: flex; align-items: center; justify-content: center;
+    z-index: 9999; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+  #gate-box {
+    max-width: 420px; width: 90%; text-align: center;
+  }
+  .gate-eyebrow {
+    font-size: 10px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
+    color: #CC0000; margin-bottom: 20px;
+  }
+  #gate-box h2 {
+    font-size: 36px; font-weight: 800; color: #fff; letter-spacing: -1px; line-height: 1.1; margin-bottom: 16px;
+  }
   #gate-box h2 span { color: #CC0000; }
-  #gate-box p { color: #555; font-size: 13px; margin-bottom: 28px; line-height: 1.7; }
-  #gate-email { width: 100%; padding: 13px 16px; border-radius: 8px; border: 1.5px solid #2e2e2e; background: #0d0d0d; color: #fff; font-size: 15px; text-align: center; outline: none; box-sizing: border-box; transition: border-color .2s; }
+  #gate-box > p { font-size: 14px; color: #888; margin-bottom: 24px; }
+  #gate-email {
+    width: 100%; padding: 14px 16px; border: 1.5px solid #333; border-radius: 8px;
+    background: #1a1a1a; color: #fff; font-size: 15px; margin-bottom: 12px;
+    outline: none; box-sizing: border-box;
+  }
   #gate-email:focus { border-color: #CC0000; }
-  #gate-email::placeholder { color: #444; font-size: 14px; }
-  #gate-btn { width: 100%; padding: 13px; background: #CC0000; color: #fff; border: none; border-radius: 8px; font-size: 15px; font-weight: 700; cursor: pointer; margin-top: 10px; transition: background .15s; }
+  #gate-btn {
+    width: 100%; padding: 14px; background: #CC0000; color: #fff; border: none;
+    border-radius: 8px; font-size: 15px; font-weight: 700; cursor: pointer;
+  }
   #gate-btn:hover { background: #a30000; }
-  #gate-btn:disabled { opacity: .6; cursor: default; }
-  #gate-error { color: #CC0000; font-size: 13px; margin-top: 12px; display: none; }
-  #gate-fine { color: #333; font-size: 11px; margin-top: 18px; }
+  #gate-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+  #gate-error { color: #ff6b6b; font-size: 13px; margin-top: 10px; display: none; }
+  #gate-fine { color: #444; font-size: 11px; margin-top: 20px; line-height: 1.5; }
 </style>
 <script>
 (function() { if (sessionStorage.getItem('ngs-access') === '1') document.getElementById('gate').style.display = 'none'; })();
 function submitGate() {
   var email = document.getElementById('gate-email').value.trim();
   var valid = email && /^[^@]+@[^@]+\.[^@]+$/.test(email);
-  if (!valid) { document.getElementById('gate-error').style.display = 'block'; document.getElementById('gate-email').focus(); return; }
+  if (!valid) { document.getElementById('gate-error').style.display = 'block'; return; }
   document.getElementById('gate-error').style.display = 'none';
   document.getElementById('gate-btn').disabled = true;
   document.getElementById('gate').style.display = 'none';
   sessionStorage.setItem('ngs-access', '1');
-  fetch('https://formspree.io/f/xykoryqk', { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify({ email: email, page: 'NGS Evaluation Hub', timestamp: new Date().toISOString() }) }).catch(function(){});
+  fetch('https://formspree.io/f/xykoryqk', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify({ email: email, page: 'NGS Evaluation Hub', timestamp: new Date().toISOString() })
+  }).catch(function(){});
 }
-document.addEventListener('DOMContentLoaded', function() {
-  var inp = document.getElementById('gate-email');
-  if (inp) inp.addEventListener('keydown', function(e) { if (e.key === 'Enter') submitGate(); });
-});
 </script>
 <div id="gate">
   <div id="gate-box">
-    <div class="gate-eyebrow">Evaluation Hub &middot; Confidential</div>
-    <h2>National Gym Supply<br><span>&times; Shopify Plus</span></h2>
+    <div class="gate-eyebrow">Evaluation Hub · Confidential</div>
+    <h2>National Gym Supply<br><span>× Shopify Plus</span></h2>
     <p>Enter your email to access this document.</p>
     <input id="gate-email" type="email" placeholder="Your email address" autocomplete="email">
-    <button id="gate-btn" onclick="submitGate()">Access Document &rarr;</button>
+    <button id="gate-btn" onclick="submitGate()">Access Document →</button>
     <p id="gate-error">Please enter a valid email address.</p>
     <p id="gate-fine">This document contains confidential information intended for authorized recipients only.</p>
   </div>
