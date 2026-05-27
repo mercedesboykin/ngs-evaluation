@@ -198,9 +198,46 @@
     border-right: 1px solid #333;
   }
   .compare-cell.feature { font-weight: 600; background: #fafafa; }
-  .compare-cell .check { color: var(--green); font-weight: 700; }
-  .compare-cell .warn { color: var(--amber); font-weight: 700; }
-  .compare-cell .cross { color: var(--red); font-weight: 700; }
+  .compare-cell .check {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    background: #10b981;
+    color: white;
+    border-radius: 50%;
+    font-size: 13px;
+    font-weight: 900;
+    margin-right: 8px;
+    vertical-align: middle;
+    flex-shrink: 0;
+    box-shadow: 0 1px 3px rgba(16, 185, 129, 0.35);
+  }
+  .compare-cell .warn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    color: var(--amber);
+    font-weight: 800;
+    font-size: 15px;
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+  .compare-cell .cross {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    color: var(--red);
+    font-weight: 800;
+    font-size: 15px;
+    margin-right: 6px;
+    vertical-align: middle;
+  }
 
   /* ── COST BREAKDOWN ── */
   .cost-grid {
