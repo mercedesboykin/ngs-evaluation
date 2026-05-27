@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NGS Payments Decision — Shopify Payments vs Run Payments</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --red: #CC0000;
+    --red-dark: #a30000;
+    --red-light: #fff0f0;
+    --black: #0d0d0d;
+    --dark: #1a1a1a;
+    --border: #e5e5e5;
+    --text: #1a1a1a;
+    --muted: #5a5a5a;
+    --bg: #f5f5f5;
+    --white: #ffffff;
+    --green: #0a7f3f;
+    --amber: #b35900;
+    --max: 960px;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  .wrap {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: var(--black);
+    border-bottom: 4px solid var(--red);
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 320px; height: 100%;
+    background: linear-gradient(135deg, transparent 40%, rgba(204,0,0,0.08));
+    pointer-events: none;
+  }
+  .header .wrap { padding-top: 72px; padding-bottom: 56px; text-align: center; }
+  .header-eyebrow {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 18px;
+  }
+  .header h1 {
+    font-size: 56px;
+    font-weight: 800;
+    color: var(--white);
+    letter-spacing: -1.5px;
+    line-height: 1.05;
+  }
+  .header h1 span { color: var(--red); }
+  .header-sub { color: #aaa; font-size: 16px; margin-top: 20px; max-width: 680px; margin-left: auto; margin-right: auto; }
+  .header-meta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px; justify-content: center; }
+  .badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 6px 16px; border-radius: 20px;
+    font-size: 12px; font-weight: 600; letter-spacing: 0.3px;
+  }
+  .badge-red { background: var(--red); color: white; }
+  .badge-outline { border: 1.5px solid #444; color: #aaa; }
+
+  /* ── TAB NAV ── */
+  .tab-nav {
+    background: var(--dark);
+    border-bottom: 1px solid #2a2a2a;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .tab-nav .wrap {
+    display: flex;
+    gap: 2px;
+    overflow-x: auto;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  .tab-nav .wrap::-webkit-scrollbar { display: none; }
+  .tab-btn {
+    padding: 16px 20px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: #888;
+    border-bottom: 3px solid transparent;
+    white-space: nowrap;
+    letter-spacing: 0.2px;
+    transition: color 0.15s;
+    flex-shrink: 0;
+  }
+  .tab-btn:hover { color: #ccc; }
+  .tab-btn.active { color: var(--white); border-bottom-color: var(--red); }
+
+  /* ── CONTENT ── */
+  .content { padding: 48px 0 96px; }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* ── SECTION HEADER ── */
+  .section-header { margin-bottom: 32px; }
+  .section-eyebrow {
+    font-size: 11px; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--red); margin-bottom: 10px;
+  }
+  .section-header h2 {
+    font-size: 36px; font-weight: 800; letter-spacing: -0.8px;
+    line-height: 1.15; color: var(--black);
+  }
+  .section-lede {
+    font-size: 17px; color: var(--muted); margin-top: 14px;
+    max-width: 720px; line-height: 1.55;
+  }
+
+  /* ── CARDS ── */
+  .card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 28px;
+    margin-bottom: 18px;
+  }
+  .card.accent {
+    border-left: 4px solid var(--red);
+    background: #fff7f7;
+  }
+  .card.muted {
+    background: #fafafa;
+  }
+  .card h3 {
+    font-size: 19px; font-weight: 700; margin-bottom: 12px; color: var(--black);
+  }
+  .card p { color: #2a2a2a; margin-bottom: 10px; }
+  .card p:last-child { margin-bottom: 0; }
+
+  /* ── KEYNOTE ── */
+  .keynote {
+    background: var(--black);
+    color: var(--white);
+    border-radius: 12px;
+    padding: 48px 40px;
+    margin-bottom: 32px;
+    position: relative;
+    overflow: hidden;
+  }
+  .keynote::before {
+    content: '';
+    position: absolute;
+    top: -50%; right: -10%;
+    width: 380px; height: 380px;
+    background: radial-gradient(circle, rgba(204,0,0,0.18), transparent 70%);
+  }
+  .keynote-eyebrow {
+    font-size: 11px; font-weight: 700; letter-spacing: 3px;
+    color: var(--red); text-transform: uppercase; margin-bottom: 14px;
+    position: relative;
+  }
+  .keynote h3 {
+    font-size: 32px; font-weight: 800; letter-spacing: -0.5px;
+    line-height: 1.2; margin-bottom: 18px; position: relative;
+  }
+  .keynote p {
+    font-size: 17px; color: #ccc; line-height: 1.55;
+    position: relative; max-width: 720px;
+  }
+
+  /* ── METRICS ── */
+  .metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 14px;
+    margin: 24px 0;
+  }
+  .metric {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 22px 18px;
+    text-align: center;
+  }
+  .metric-value {
+    font-size: 30px; font-weight: 800; color: var(--red);
+    letter-spacing: -0.5px; line-height: 1;
+  }
+  .metric-label {
+    font-size: 12px; color: var(--muted); margin-top: 8px;
+    text-transform: uppercase; letter-spacing: 1px; font-weight: 600;
+  }
+
+  /* ── TABLE ── */
+  .compare-table {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 18px;
+  }
+  .compare-row {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr;
+    border-bottom: 1px solid var(--border);
+  }
+  .compare-row:last-child { border-bottom: none; }
+  .compare-row.head {
+    background: var(--black); color: var(--white);
+    font-weight: 700; font-size: 13px; letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  .compare-cell {
+    padding: 16px 18px;
+    border-right: 1px solid var(--border);
+    font-size: 14.5px;
+    line-height: 1.45;
+  }
+  .compare-cell:last-child { border-right: none; }
+  .compare-row.head .compare-cell {
+    border-right: 1px solid #333;
+  }
+  .compare-cell.feature { font-weight: 600; background: #fafafa; }
+  .compare-cell .check { color: var(--green); font-weight: 700; }
+  .compare-cell .warn { color: var(--amber); font-weight: 700; }
+  .compare-cell .cross { color: var(--red); font-weight: 700; }
+
+  /* ── COST BREAKDOWN ── */
+  .cost-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 18px;
+  }
+  .cost-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .cost-card.run { border-top: 4px solid var(--red); }
+  .cost-card.shopify { border-top: 4px solid var(--green); }
+  .cost-card-header {
+    padding: 18px 22px 14px;
+    border-bottom: 1px solid var(--border);
+    background: #fafafa;
+  }
+  .cost-card-header h4 {
+    font-size: 16px; font-weight: 700; letter-spacing: 0.2px;
+  }
+  .cost-card-header .sub {
+    font-size: 12px; color: var(--muted); margin-top: 4px;
+    text-transform: uppercase; letter-spacing: 1px;
+  }
+  .cost-line {
+    display: flex; justify-content: space-between;
+    padding: 12px 22px; border-bottom: 1px solid var(--border);
+    font-size: 14px;
+  }
+  .cost-line:last-child { border-bottom: none; }
+  .cost-line.total { font-weight: 700; background: #fafafa; color: var(--black); }
+  .cost-line .label { color: #444; }
+  .cost-line .value { font-weight: 600; }
+  .cost-line.bad .value { color: var(--red); }
+  .cost-line.good .value { color: var(--green); }
+
+  /* ── QUESTIONS LIST ── */
+  .question {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--red);
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin-bottom: 14px;
+  }
+  .question-num {
+    font-size: 11px; color: var(--red); font-weight: 700;
+    letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px;
+  }
+  .question p {
+    font-size: 16px; font-weight: 600; color: var(--black);
+    line-height: 1.45;
+  }
+  .question .why {
+    font-size: 13.5px; color: var(--muted); font-weight: 400;
+    margin-top: 8px; line-height: 1.5;
+  }
+
+  /* ── RECOMMENDATION ── */
+  .rec-box {
+    background: linear-gradient(135deg, var(--black), #1a1a1a);
+    color: var(--white);
+    border-radius: 12px;
+    padding: 40px;
+    margin-bottom: 28px;
+    border: 1px solid #2a2a2a;
+  }
+  .rec-box h3 {
+    font-size: 28px; font-weight: 800;
+    letter-spacing: -0.5px; margin-bottom: 18px;
+  }
+  .rec-box h3 span { color: var(--red); }
+  .rec-box p {
+    font-size: 16px; color: #ccc; line-height: 1.6;
+    margin-bottom: 12px;
+  }
+  .rec-box p:last-child { margin-bottom: 0; }
+  .rec-box strong { color: var(--white); }
+
+  /* ── FOOTER ── */
+  .footer {
+    border-top: 1px solid var(--border);
+    background: var(--white);
+    padding: 32px 0;
+    color: var(--muted);
+    font-size: 13px;
+    text-align: center;
+  }
+  .footer .wrap { padding-top: 0; padding-bottom: 0; }
+  .footer strong { color: var(--text); }
+
+  /* ── UTILS ── */
+  ul.tight { list-style: none; padding: 0; margin: 0; }
+  ul.tight li {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 14.5px;
+    color: #2a2a2a;
+  }
+  ul.tight li:last-child { border-bottom: none; }
+  ul.tight li strong { color: var(--black); }
+
+  .pill {
+    display: inline-block; padding: 3px 10px; border-radius: 12px;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  .pill-red { background: #ffe5e5; color: var(--red); }
+  .pill-green { background: #e0f5e9; color: var(--green); }
+  .pill-amber { background: #fff3e0; color: var(--amber); }
+
+  @media (max-width: 720px) {
+    .header h1 { font-size: 40px; }
+    .section-header h2 { font-size: 28px; }
+    .compare-row { grid-template-columns: 1fr; }
+    .compare-cell { border-right: none; border-bottom: 1px solid var(--border); }
+    .cost-grid { grid-template-columns: 1fr; }
+    .keynote { padding: 32px 24px; }
+    .keynote h3 { font-size: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="wrap">
+    <div class="header-eyebrow">National Gym Supply × Shopify Plus</div>
+    <h1>The Payments<br>Decision <span>Matters</span></h1>
+    <p class="header-sub">A side-by-side look at Shopify Payments versus Run Payments — and the questions worth asking before the contract is signed.</p>
+    <div class="header-meta">
+      <span class="badge badge-red">Prepared for Tony Meirovitz</span>
+      <span class="badge badge-outline">May 27, 2026</span>
+      <span class="badge badge-outline">Confidential — NGS Leadership</span>
+    </div>
+  </div>
+</header>
+
+<nav class="tab-nav">
+  <div class="wrap">
+    <button class="tab-btn active" data-tab="conflict">The Conflict</button>
+    <button class="tab-btn" data-tab="impact">Feature Impact</button>
+    <button class="tab-btn" data-tab="math">The Math</button>
+    <button class="tab-btn" data-tab="tradeoff">Honest Tradeoff</button>
+    <button class="tab-btn" data-tab="questions">Questions to Ask</button>
+    <button class="tab-btn" data-tab="rec">Recommendation</button>
+  </div>
+</nav>
+
+<main class="content">
+  <div class="wrap">
+
+    <!-- ── TAB 1: THE CONFLICT ── -->
+    <section class="tab-panel active" id="conflict">
+      <div class="section-header">
+        <div class="section-eyebrow">Slide 1 — Start Here</div>
+        <h2>The PE firm pushing Run Payments<br>owns both companies.</h2>
+        <p class="section-lede">This isn't speculation. Run Payments markets it directly: residual revenue flows to ISO partners on every transaction. That residual is paid by the merchant, not the PE firm.</p>
+      </div>
+
+      <div class="keynote">
+        <div class="keynote-eyebrow">Run Payments' Own Marketing</div>
+        <h3>"Residual operations — automated complex payouts with configurable splits and audit trails."</h3>
+        <p>This is one of Run Partner's core advertised features. It's the mechanism by which the PE firm earns money when their portfolio companies route payments through Run. There's nothing hidden about it — but it deserves to be on the table before NGS commits.</p>
+      </div>
+
+      <div class="card accent">
+        <h3>What this means in plain terms</h3>
+        <p><strong>The PE firm is not a neutral advisor on this decision.</strong> They're a vendor with a financial interest in NGS choosing Run Payments. The "synergy" argument inside the portfolio is real — for them. For NGS, every basis point of Run's processing fee includes the residual NGS is paying back to its own owner.</p>
+        <p>This isn't an indictment of the PE firm — it's how PE-owned payment ISOs work. But it changes how the recommendation should be evaluated: <strong>not as advice from your board, but as a vendor quote from a related party.</strong></p>
+      </div>
+
+      <div class="card">
+        <h3>Why this matters for Tony's mandate</h3>
+        <p>NGS is rebuilding after a $250K+ failed replatform. The board's confidence in this build depends on Tony making decisions that hold up to scrutiny. A payments decision driven by undisclosed portfolio economics — versus a vendor selection based on the merchant's actual needs — is the kind of choice that gets questioned later.</p>
+        <p>The path forward isn't to refuse Run Payments outright. It's to <strong>get the residual structure in writing</strong>, weigh it against what NGS gives up, and let the math speak.</p>
+      </div>
+    </section>
+
+    <!-- ── TAB 2: FEATURE IMPACT ── -->
+    <section class="tab-panel" id="impact">
+      <div class="section-header">
+        <div class="section-eyebrow">Slide 2 — What NGS Loses</div>
+        <h2>Every B2B feature scoped on<br>May 20 requires Shopify Payments.</h2>
+        <p class="section-lede">DYODE and Jordan walked through these on the May 20 technical discovery. Each one is a Shopify B2B-native feature that only works when Shopify Payments is the processor.</p>
+      </div>
+
+      <div class="compare-table">
+        <div class="compare-row head">
+          <div class="compare-cell">NGS Requirement (from May 20)</div>
+          <div class="compare-cell">Shopify Payments on Plus</div>
+          <div class="compare-cell">Run Payments</div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell feature">4-tier pricing (A/B/C/D) + net terms tied to Company Location</div>
+          <div class="compare-cell"><span class="check">✓</span> Native B2B Payment Terms (Net 7/15/30/45/60/90)</div>
+          <div class="compare-cell"><span class="warn">~</span> Invoicing only — no tie to Shopify B2B catalog/tier</div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell feature">PO capture at checkout</div>
+          <div class="compare-cell"><span class="check">✓</span> Native B2B checkout field</div>
+          <div class="compare-cell"><span class="warn">~</span> Workaround required outside checkout</div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell feature">Quote-to-cart with vaulted card<br><span style="font-size:12px; color:var(--muted); font-weight:400;">30–35% of orders involve quoting</span></div>
+          <div class="compare-cell"><span class="check">✓</span> Draft Orders + vaulted card on Company Location; rep charges saved card without re-auth</div>
+          <div class="compare-cell"><span class="cross">✗</span> Vaulted cards <em>not available</em> for B2B draft orders. Every quote conversion requires fresh authorization.</div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell feature">ACH for repeat B2B buyers</div>
+          <div class="compare-cell"><span class="check">✓</span> Native US ACH (Plus + SP + Stripe), vaultable</div>
+          <div class="compare-cell"><span class="warn">~</span> Via 3rd-party (ACheck, TeleCheck, Paya) — reconciles in Run's portal, not Shopify</div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell feature">Deposits / partial payments on large equipment orders</div>
+          <div class="compare-cell"><span class="check">✓</span> Plus B2B exclusive — set deposit % per net term</div>
+          <div class="compare-cell"><span class="cross">✗</span> Not a native B2B checkout concept</div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell feature">Store credit (returns, RMAs on $250+ AOV parts)</div>
+          <div class="compare-cell"><span class="check">✓</span> Native</div>
+          <div class="compare-cell"><span class="cross">✗</span> Not part of the platform</div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell feature">Multi-brand (NGS + Intek under one Org)</div>
+          <div class="compare-cell"><span class="check">✓</span> Intek already on Shopify Basic — unified payments view in same Org</div>
+          <div class="compare-cell"><span class="warn">~</span> Each brand = separate Run merchant account</div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell feature">AI PO import (24 Hour Fitness, LA Fitness — on wishlist)</div>
+          <div class="compare-cell"><span class="check">✓</span> Shopify Functions + Flow + app ecosystem</div>
+          <div class="compare-cell"><span class="warn">~</span> Requires custom integration outside Shopify</div>
+        </div>
+      </div>
+
+      <div class="card accent">
+        <h3>The single biggest impact: vaulted cards on B2B quote conversions</h3>
+        <p>At 300–400 orders/day with 30–35% involving a quote, that's <strong>~100–140 quote conversions every day</strong>. With Shopify Payments, each is a one-click vaulted-card charge. With Run, each one becomes a manual payment-request workflow.</p>
+        <p>This was the failure mode of the prior $250K replatform — payment friction in the buying flow. It cannot be the failure mode of this build.</p>
+      </div>
+    </section>
+
+    <!-- ── TAB 3: THE MATH ── -->
+    <section class="tab-panel" id="math">
+      <div class="section-header">
+        <div class="section-eyebrow">Slide 3 — Show the Numbers</div>
+        <h2>The cost picture nobody<br>is putting in writing.</h2>
+        <p class="section-lede">On a fresh Plus deal with no incumbent processor, the path to Run Payments adds costs that don't exist on Shopify Payments. Approximate figures below — Deal Desk will sharpen these with Plus Exclusive Rates.</p>
+      </div>
+
+      <div class="metrics">
+        <div class="metric">
+          <div class="metric-value">$12M</div>
+          <div class="metric-label">NGS Annual GMV</div>
+        </div>
+        <div class="metric">
+          <div class="metric-value">60/40</div>
+          <div class="metric-label">B2B / D2C Split</div>
+        </div>
+        <div class="metric">
+          <div class="metric-value">0.15%</div>
+          <div class="metric-label">Plus 3P TXN Fee</div>
+        </div>
+        <div class="metric">
+          <div class="metric-value">~$18K</div>
+          <div class="metric-label">Annual 3P Fee Leakage</div>
+        </div>
+      </div>
+
+      <div class="cost-grid">
+        <div class="cost-card run">
+          <div class="cost-card-header">
+            <h4>NGS on Plus with Run Payments</h4>
+            <div class="sub">PE-routed scenario</div>
+          </div>
+          <div class="cost-line bad">
+            <span class="label">Run processing fees (interchange-plus)</span>
+            <span class="value">undisclosed</span>
+          </div>
+          <div class="cost-line bad">
+            <span class="label">PE residual embedded in Run's markup</span>
+            <span class="value">undisclosed</span>
+          </div>
+          <div class="cost-line bad">
+            <span class="label">Shopify Plus 3P TXN Fee — 0.15%</span>
+            <span class="value">~$18,000/yr</span>
+          </div>
+          <div class="cost-line bad">
+            <span class="label">Plus B2B VPF on B2B GMV</span>
+            <span class="value">applies either way</span>
+          </div>
+          <div class="cost-line total">
+            <span class="label">Plus: every B2B-native feature broken</span>
+            <span class="value">see Slide 2</span>
+          </div>
+        </div>
+
+        <div class="cost-card shopify">
+          <div class="cost-card-header">
+            <h4>NGS on Plus with Shopify Payments</h4>
+            <div class="sub">Recommended scenario</div>
+          </div>
+          <div class="cost-line good">
+            <span class="label">Plus Exclusive Rates (verify in Deal Desk)</span>
+            <span class="value">negotiable</span>
+          </div>
+          <div class="cost-line good">
+            <span class="label">PE residual</span>
+            <span class="value">$0</span>
+          </div>
+          <div class="cost-line good">
+            <span class="label">Shopify Plus 3P TXN Fee</span>
+            <span class="value">$0 (waived)</span>
+          </div>
+          <div class="cost-line good">
+            <span class="label">Plus B2B VPF on B2B GMV</span>
+            <span class="value">applies either way</span>
+          </div>
+          <div class="cost-line total">
+            <span class="label">Plus: every B2B-native feature delivered</span>
+            <span class="value">see Slide 2</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>What this means before negotiating a single rate</h3>
+        <p>Even before Deal Desk sharpens the Plus Exclusive Rate, the <strong>Shopify Plus 3rd-party transaction fee alone is ~$18,000/year of pure leakage</strong> that disappears if NGS uses Shopify Payments. That's $90,000 over a 5-year contract — paid to Shopify regardless of how good Run's processing rate looks on paper.</p>
+        <p>The PE residual is layered on top of that. Neither figure has been quantified to NGS in writing.</p>
+      </div>
+    </section>
+
+    <!-- ── TAB 4: HONEST TRADEOFF ── -->
+    <section class="tab-panel" id="tradeoff">
+      <div class="section-header">
+        <div class="section-eyebrow">Slide 4 — Be Fair</div>
+        <h2>Where Run Payments<br>does have a real advantage.</h2>
+        <p class="section-lede">This isn't a zero-sum comparison. Run has one legitimate edge worth taking seriously — and it's worth quantifying honestly rather than waving it away.</p>
+      </div>
+
+      <div class="card accent">
+        <h3>Level 2 / Level 3 data on commercial cards</h3>
+        <p>Run's Virtual Terminal captures Level 2 and Level 3 transaction data, which can lower interchange on <strong>business, purchasing, and corporate cards</strong> by approximately 50–100 basis points. Shopify Payments doesn't currently pass full L2/L3 data.</p>
+        <p>For NGS, this matters most on transactions paid with corporate procurement cards — which is plausible for buyers like 24 Hour Fitness or LA Fitness placing large parts orders through their purchasing departments.</p>
+      </div>
+
+      <div class="card">
+        <h3>The honest framing</h3>
+        <p>For roughly <strong>10–20% of NGS's B2B volume</strong> that runs on corporate procurement cards, Run will save 50–100 bps on interchange. For the other 80–90% of volume (consumer credit, debit, ACH, store credit, deposits), Run costs more — either directly in processing fees or indirectly in lost B2B-native features.</p>
+        <p>The PE firm is selling the 10–20% advantage. They aren't talking about the 80–90% cost.</p>
+      </div>
+
+      <div class="keynote">
+        <div class="keynote-eyebrow">What we should do, not avoid</div>
+        <h3>Quantify the L2/L3 advantage with real numbers.</h3>
+        <p>Ask Brian or the prior processor for a sample month showing card mix — specifically the share of transactions on business, purchasing, and corporate cards. That single data point lets us calculate the actual L2/L3 dollar advantage to within $1,000/year. Then weigh it against the ~$18K/yr 3P fee leakage and the feature loss. If the math favors Run on a specific volume segment, we'd hear it out — but it needs to be measured, not assumed.</p>
+      </div>
+    </section>
+
+    <!-- ── TAB 5: QUESTIONS TO ASK ── -->
+    <section class="tab-panel" id="questions">
+      <div class="section-header">
+        <div class="section-eyebrow">Slide 5 — For the PE Firm</div>
+        <h2>Five questions that<br>deserve answers in writing.</h2>
+        <p class="section-lede">Tony, Vince, and the board should be able to point to documented answers on each of these before NGS commits to Run Payments. These aren't gotcha questions — they're standard related-party due diligence.</p>
+      </div>
+
+      <div class="question">
+        <div class="question-num">Question 01</div>
+        <p>What residual structure does the PE firm earn on NGS's Run Payments transaction volume?</p>
+        <div class="why">Run Payments markets residual operations as a core ISO feature. NGS is entitled to know what percentage of every transaction routes back to its own owner — and whether NGS is on the standard merchant rate card or carrying portfolio uplift.</div>
+      </div>
+
+      <div class="question">
+        <div class="question-num">Question 02</div>
+        <p>Is NGS receiving preferential pricing relative to non-portfolio Run merchants — and if so, by how much?</p>
+        <div class="why">If the answer is "no," the synergy argument falls apart — NGS would be paying the same rates as any merchant off the street. If "yes," it should be documented in basis points, not adjectives.</div>
+      </div>
+
+      <div class="question">
+        <div class="question-num">Question 03</div>
+        <p>How will NGS handle vaulted-card charges on the 30–35% of orders that go through quoting?</p>
+        <div class="why">Shopify B2B draft orders only allow vaulted cards that were saved via Shopify Payments on a previous B2B checkout. Run's customer vault lives outside Shopify B2B checkout. The workaround needs to be defined before commit.</div>
+      </div>
+
+      <div class="question">
+        <div class="question-num">Question 04</div>
+        <p>Has the PE firm modeled NGS's total cost including Shopify's 0.15% 3rd-party transaction fee?</p>
+        <div class="why">On $12M in GMV, that's ~$18,000/year that Shopify collects from NGS for using a non-Shopify gateway on Plus. That fee disappears with Shopify Payments. Any cost comparison that omits it is incomplete.</div>
+      </div>
+
+      <div class="question">
+        <div class="question-num">Question 05</div>
+        <p>What is the contractual exit path if NGS later wants to move payments to Shopify Payments?</p>
+        <div class="why">If Run is sold via a multi-year minimum, termination fee, or volume commitment, the cost of correcting the decision later belongs in today's math.</div>
+      </div>
+    </section>
+
+    <!-- ── TAB 6: RECOMMENDATION ── -->
+    <section class="tab-panel" id="rec">
+      <div class="section-header">
+        <div class="section-eyebrow">Slide 6 — The Call</div>
+        <h2>Shopify Payments on Plus<br>is the right call for NGS.</h2>
+        <p class="section-lede">Not because it's our product — because every requirement Tony, Brian, and DYODE confirmed on May 20 either requires it outright or works dramatically better with it.</p>
+      </div>
+
+      <div class="rec-box">
+        <h3>The <span>recommendation</span></h3>
+        <p><strong>Move forward with Shopify Payments as NGS's processor on Plus.</strong> The B2B-native feature set — vaulted cards on Company Location, net terms tied to catalog tier, deposits, ACH, store credit, PO capture at checkout — is what makes this replatform succeed where the last one failed.</p>
+        <p>The ~$18K/year of avoided 3rd-party transaction fees and the elimination of an undisclosed PE residual are real dollars. The L2/L3 advantage on corporate cards is real but limited — and worth measuring before assuming it changes the answer.</p>
+        <p><strong>The next step is not to refuse Run Payments outright.</strong> It's to put the five questions in front of the PE firm and the board, and let the documented answers drive the decision.</p>
+      </div>
+
+      <div class="card">
+        <h3>Suggested sequence</h3>
+        <ul class="tight">
+          <li><strong>This week —</strong> Tony forwards the five questions to the PE firm in writing.</li>
+          <li><strong>Within 2 weeks —</strong> Mercedes + Jordan pull Plus Exclusive Rates from Shopify Deal Desk for a verified head-to-head quote.</li>
+          <li><strong>Before contracts —</strong> Brian shares a sample month of card mix data so the L2/L3 advantage can be quantified to the dollar.</li>
+          <li><strong>Board update —</strong> Vince Smith (Interim CEO / Chairman) sees this comparison alongside the PE firm's response — not as a one-sided pitch.</li>
+        </ul>
+      </div>
+
+      <div class="card muted">
+        <h3>Contacts</h3>
+        <p><strong>Mercedes Boykin-Sabalones</strong> — Account Executive, Shopify B2B<br>
+        mercedes.boykin-sabalones@shopify.com</p>
+        <p><strong>Jordan Murphy</strong> — Solutions Engineer, Shopify<br>
+        Available to walk through the B2B technical architecture and demo the vaulted-card / draft-order flow live.</p>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    Prepared by Shopify for <strong>National Gym Supply</strong> · May 2026<br>
+    Confidential — for NGS leadership review. Figures noted as approximate require Deal Desk verification before contracting.
+  </div>
+</footer>
+
+<script>
+  const tabs = document.querySelectorAll('.tab-btn');
+  const panels = document.querySelectorAll('.tab-panel');
+  tabs.forEach(t => {
+    t.addEventListener('click', () => {
+      tabs.forEach(x => x.classList.remove('active'));
+      panels.forEach(p => p.classList.remove('active'));
+      t.classList.add('active');
+      document.getElementById(t.dataset.tab).classList.add('active');
+      window.scrollTo({ top: document.querySelector('.tab-nav').offsetTop, behavior: 'smooth' });
+    });
+  });
+</script>
+
+</body>
+</html>
