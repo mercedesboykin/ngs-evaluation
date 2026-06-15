@@ -305,6 +305,94 @@
   .win-card li:last-child { border-bottom: none; }
   .win-card li strong { color: var(--black); display: block; margin-bottom: 3px; font-size: 13.5px; }
 
+  /* ── D2C STANDOUT (Shop Pay purple) ── */
+  .d2c-standout {
+    background: linear-gradient(135deg, #5A31F4 0%, #3F1FBE 100%);
+    border-radius: 12px;
+    padding: 30px 32px;
+    margin-bottom: 22px;
+    color: white;
+    box-shadow: 0 6px 20px rgba(90, 49, 244, 0.20);
+    position: relative;
+    overflow: hidden;
+  }
+  .d2c-standout::before {
+    content: "";
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 200px; height: 200px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .d2c-standout-eyebrow {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.85);
+    margin-bottom: 10px;
+    position: relative;
+  }
+  .d2c-standout h3 {
+    font-size: 24px;
+    font-weight: 800;
+    color: white;
+    margin-bottom: 12px;
+    line-height: 1.22;
+    position: relative;
+  }
+  .d2c-standout > p {
+    color: rgba(255,255,255,0.92);
+    font-size: 14.5px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    position: relative;
+    max-width: 720px;
+  }
+  .d2c-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    position: relative;
+  }
+  .d2c-item {
+    background: rgba(255,255,255,0.10);
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 8px;
+    padding: 16px 18px;
+  }
+  .d2c-item h4 {
+    color: white;
+    font-size: 14.5px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    line-height: 1.3;
+  }
+  .d2c-item p {
+    color: rgba(255,255,255,0.88);
+    font-size: 13px;
+    line-height: 1.55;
+    margin: 0;
+  }
+  .d2c-pill {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    color: white;
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 999px;
+    margin-bottom: 8px;
+  }
+  @media (max-width: 720px) {
+    .d2c-grid { grid-template-columns: 1fr; }
+    .d2c-standout { padding: 22px; }
+    .d2c-standout h3 { font-size: 20px; }
+  }
+
   /* ── RECOMMENDATION ── */
   .rec-box {
     background: var(--white);
@@ -583,6 +671,62 @@
         <div class="section-eyebrow">Section 4</div>
         <h2>Where each provider is strongest.</h2>
         <p class="section-lede">Both options have legitimate strengths. The question is which set of strengths matters more for NGS's specific volume mix and operating model.</p>
+      </div>
+
+      <div class="d2c-standout">
+        <div class="d2c-standout-eyebrow">Available only with Shopify Payments</div>
+        <h3>The D2C growth stack NGS forfeits without Shopify Payments.</h3>
+        <p>40% of NGS's revenue (~$4.8M/yr) is D2C. The tools below are not payment features — they're a network of acquisition, conversion, and retention products gated behind Shopify Payments. A third-party gateway like Run can match Shopify on processing, but none of these tools are available without Shop Pay as the primary checkout.</p>
+
+        <div class="d2c-grid">
+          <div class="d2c-item">
+            <span class="d2c-pill">Conversion</span>
+            <h4>Shop Pay accelerated checkout (the purple button)</h4>
+            <p>The fastest checkout on the internet — ~5% measured lower-funnel conversion lift (Forrester Wave Q2 2024). Directionally ~$240K/yr in incremental converted revenue on NGS's D2C side at flat traffic.</p>
+          </div>
+
+          <div class="d2c-item">
+            <span class="d2c-pill">Acquisition</span>
+            <h4>Shop App marketplace + product discoverability</h4>
+            <p>NGS's catalog surfaces inside the Shop App to 100M+ active Shop users. Built-in re-engagement, order tracking, and follow-up — a no-cost acquisition and retention channel that exists only for Shopify Payments stores.</p>
+          </div>
+
+          <div class="d2c-item">
+            <span class="d2c-pill">Checkout UX</span>
+            <h4>Network checkout autofill</h4>
+            <p>Anyone who's ever used Shop Pay anywhere on the internet sees their address, card, and contact info one-tap loaded on NGS's checkout. Removes friction for first-time D2C buyers — the segment most sensitive to checkout abandonment.</p>
+          </div>
+
+          <div class="d2c-item">
+            <span class="d2c-pill">Retention</span>
+            <h4>Shop Cash rewards</h4>
+            <p>Buyer-incentive program funded by Shopify. Customers earn Shop Cash and redeem it across the Shop network. Drives repeat purchase and steers consideration toward Shopify Payments merchants. Cannot be issued by Run.</p>
+          </div>
+
+          <div class="d2c-item">
+            <span class="d2c-pill">AOV</span>
+            <h4>Shop Pay Installments</h4>
+            <p>BNPL via Affirm, native at checkout. Lifts AOV on higher-ticket D2C purchases — relevant for $500–$2,000 home gym and replacement-part orders. Only enabled when Shopify Payments is the gateway.</p>
+          </div>
+
+          <div class="d2c-item">
+            <span class="d2c-pill">Performance Marketing</span>
+            <h4>Shop Campaigns + Shopify Audiences</h4>
+            <p>CPA-based paid acquisition where Shopify only charges per converted order. Audience matching across the Shop graph to lower paid-ad CAC. Both require Shopify Payments as the gateway.</p>
+          </div>
+
+          <div class="d2c-item">
+            <span class="d2c-pill">Trust</span>
+            <h4>One-tap recognized checkout</h4>
+            <p>D2C buyers already trust the Shop Pay UX from millions of other stores. Removes the friction of entering payment details on an unfamiliar brand — a meaningful conversion variable for net-new buyers from paid traffic.</p>
+          </div>
+
+          <div class="d2c-item">
+            <span class="d2c-pill">Fraud</span>
+            <h4>Shopify Protect</h4>
+            <p>Chargeback protection on eligible D2C orders, included for stores on Shopify Payments. Eliminates the operational lift of fighting chargebacks on consumer card-not-present transactions.</p>
+          </div>
+        </div>
       </div>
 
       <div class="wins-grid">
