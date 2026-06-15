@@ -399,6 +399,7 @@
       <div class="card">
         <h3>Run Payments</h3>
         <p>A payment orchestration platform and ISO, registered with Wells Fargo and Fifth Third Bank. Routes transactions through third-party processors (Payroc, TSYS, Fiserv) and gateways (Worldnet, CyberSource, CardPointe, Accept Blue, iStream). Supports embedded payments via API/SDK and is positioned for ISVs, ISOs, and enterprise merchants needing multi-processor flexibility.</p>
+        <p style="margin-top:12px;padding:10px 14px;background:rgba(245,158,11,0.08);border-left:3px solid var(--amber);border-radius:4px;"><strong>Confirmed by Run (June 2026):</strong> If NGS uses Run on the new site, the engagement would be a <strong>straight gateway</strong> model — not aggregated / PayFac. NGS holds its own merchant account directly with the sponsor bank and is underwritten as the merchant of record.</p>
       </div>
 
       <div class="card muted">
@@ -504,7 +505,7 @@
           <div class="metric-label">B2B / D2C Mix</div>
         </div>
         <div class="metric">
-          <div class="metric-value">0.15%</div>
+          <div class="metric-value">0.20%</div>
           <div class="metric-label">Plus 3P Fee Rate</div>
         </div>
         <div class="metric">
@@ -556,7 +557,7 @@
           </div>
           <div class="cost-line">
             <span class="label">Shopify Plus 3P transaction fee</span>
-            <span class="value">0.15% (~$18K/yr on $12M)</span>
+            <span class="value">0.20% (~$24K/yr on $12M)</span>
           </div>
           <div class="cost-line">
             <span class="label">B2B Variable Platform Fee</span>
@@ -571,7 +572,7 @@
 
       <div class="card">
         <h3>How to read this</h3>
-        <p>Shopify Plus charges a 0.15% third-party transaction fee on transactions processed through any non-Shopify gateway. On NGS's ~$12M GMV that's approximately <strong>$18,000/year</strong> on top of whatever Run charges. The fee is waived when Shopify Payments is the primary gateway.</p>
+        <p>Shopify Plus charges a 0.20% third-party transaction fee on transactions processed through any non-Shopify gateway. On NGS's ~$12M GMV that's approximately <strong>$24,000/year</strong> on top of whatever Run charges. The fee is waived when Shopify Payments is the primary gateway.</p>
         <p>Run's interchange-plus model can be advantageous on volume mixes with significant commercial / purchasing card activity (see Section 4). The actual cost comparison depends on three numbers NGS should request in writing: <strong>Run's markup over interchange, Shopify's Plus Exclusive Rate, and NGS's card mix</strong>.</p>
       </div>
     </section>
@@ -598,7 +599,7 @@
             </li>
             <li>
               <strong>No third-party transaction fee</strong>
-              On Plus, the 0.15% 3P fee is waived when Shopify Payments is the primary gateway.
+              On Plus, the 0.20% 3P fee is waived when Shopify Payments is the primary gateway.
             </li>
             <li>
               <strong>Shop Pay conversion lift</strong>
@@ -656,19 +657,8 @@
       <div class="rec-box">
         <h3>Shopify Payments fits NGS's requirements as defined today.</h3>
         <p>Of the 11 requirements mapped in Section 2, Shopify Payments is the native solution for 8 of them — including the four that tie directly to NGS's daily operating model: <strong>vaulted card on quote conversion, net terms by Company Location, deposits on large orders, and unified ledger across NGS + Intek</strong>. Run Payments delivers two requirements more strongly (L2/L3 data and surcharging) and matches on the rest.</p>
-        <p>The cost picture, before any rate negotiation, includes a $0.15% third-party transaction fee on Run-routed transactions that doesn't apply to Shopify Payments. On NGS's volume that's approximately $18,000 per year in addition to Run's processing fees.</p>
+        <p>The cost picture, before any rate negotiation, includes a 0.20% third-party transaction fee on Run-routed transactions that doesn't apply to Shopify Payments. On NGS's volume that's approximately $24,000 per year in addition to Run's processing fees.</p>
         <p>The strongest case for Run Payments would emerge if NGS's commercial-card share is high enough that Level 2/3 interchange savings exceed the combined cost of the 3P fee, the lost B2B-native features, and the operational overhead of a second reconciliation surface. <strong>Pulling card-mix data from the current processor is the single most valuable next step.</strong></p>
-      </div>
-
-      <div class="card">
-        <h3>Suggested next steps</h3>
-        <ul class="tight">
-          <li><strong>1.</strong> Mercedes + Jordan pull Plus Exclusive Rates from Shopify Deal Desk for a verified head-to-head quote.</li>
-          <li><strong>2.</strong> Brian (IT) pulls a sample month of card-mix data from the current processor — commercial vs consumer card share.</li>
-          <li><strong>3.</strong> Run provides a written quote: markup over interchange, monthly minimums, contract term, exit terms.</li>
-          <li><strong>4.</strong> Compare apples-to-apples: total annual cost across both options at NGS's actual card mix.</li>
-          <li><strong>5.</strong> Confirm the B2B feature plan: if Run is selected, what's the workaround for vaulted-card-on-draft-order, deposits, and store credit?</li>
-        </ul>
       </div>
 
       <div class="card muted">
