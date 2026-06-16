@@ -464,6 +464,7 @@
     <button class="tab-btn" data-tab="features">Feature Comparison</button>
     <button class="tab-btn" data-tab="cost">Cost Structure</button>
     <button class="tab-btn" data-tab="strengths">Strengths by Provider</button>
+    <button class="tab-btn" data-tab="security">Security</button>
     <button class="tab-btn" data-tab="rec">Recommendation</button>
   </div>
 </nav>
@@ -787,10 +788,141 @@
       </div>
     </section>
 
+    <!-- ── SECURITY ── -->
+    <section class="tab-panel" id="security">
+      <div class="section-header">
+        <div class="section-eyebrow">Section 5</div>
+        <h2>How Shopify keeps transactions and cardholder data secure.</h2>
+        <p class="section-lede">Card-data security and PCI compliance are non-negotiable for a B2B merchant of NGS's size. Shopify Payments is built on top of Shopify's core infrastructure, which carries the highest level of payments certification available and reduces the PCI compliance burden NGS carries directly.</p>
+      </div>
+
+      <div class="metrics">
+        <div class="metric">
+          <div class="metric-value">Level 1</div>
+          <div class="metric-label">PCI DSS Service Provider</div>
+        </div>
+        <div class="metric">
+          <div class="metric-value">SOC 2</div>
+          <div class="metric-label">Type II Audited Annually</div>
+        </div>
+        <div class="metric">
+          <div class="metric-value">ISO 27001</div>
+          <div class="metric-label">Certified</div>
+        </div>
+        <div class="metric">
+          <div class="metric-value">24 / 7</div>
+          <div class="metric-label">Security Operations Center</div>
+        </div>
+      </div>
+
+      <div class="wins-grid">
+        <div class="win-card shopify">
+          <h4>Card data handling</h4>
+          <ul>
+            <li>
+              <strong>PCI DSS Level 1 certification</strong>
+              The highest tier of PCI certification, required for service providers handling 6M+ transactions per year. Audited and recertified annually by an independent QSA.
+            </li>
+            <li>
+              <strong>Tokenization at the point of capture</strong>
+              When a buyer enters card details at Shopify Checkout, the card is captured on Shopify's domain, tokenized, and stored in Shopify's PCI-scoped vault. The actual card number (PAN) never passes through the NGS storefront, admin, or ERP integration. NGS only ever sees a token.
+            </li>
+            <li>
+              <strong>Hosted checkout reduces NGS's PCI scope</strong>
+              Because card capture happens on Shopify's hosted checkout, NGS is eligible for the simplest PCI self-assessment level — SAQ A. Substantially less audit lift than capturing cards on NGS's own pages.
+            </li>
+            <li>
+              <strong>Vaulted cards on Company Location</strong>
+              For B2B repeat buyers, vaulted cards are tokenized and surfaced back into Shopify B2B draft orders without ever exposing the underlying card number to NGS staff or systems.
+            </li>
+          </ul>
+        </div>
+
+        <div class="win-card shopify">
+          <h4>Encryption &amp; infrastructure</h4>
+          <ul>
+            <li>
+              <strong>Encrypted in transit and at rest</strong>
+              TLS 1.2+ enforced across all payment flows, with HSTS and modern cipher suites. Stored payment data is encrypted at rest using AES-256.
+            </li>
+            <li>
+              <strong>Network-level protections</strong>
+              Web Application Firewall, DDoS mitigation, rate limiting, and continuous infrastructure monitoring across Shopify's global network.
+            </li>
+            <li>
+              <strong>Continuous third-party assessment</strong>
+              Public bug bounty program through HackerOne with active researcher participation. Regular third-party penetration testing on all production systems.
+            </li>
+            <li>
+              <strong>24/7 Security Operations Center</strong>
+              Dedicated security team monitoring for threats around the clock, with incident response playbooks for any anomalous activity.
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="wins-grid">
+        <div class="win-card shopify">
+          <h4>Fraud prevention</h4>
+          <ul>
+            <li>
+              <strong>Network-scale fraud intelligence</strong>
+              Every order is scored against fraud signals trained on transaction patterns across millions of Shopify stores — address verification, velocity checks, device fingerprinting, and historical fraud markers.
+            </li>
+            <li>
+              <strong>3D Secure 2 / Strong Customer Authentication</strong>
+              Step-up authentication triggers when risk signals warrant it, shifting liability for fraudulent chargebacks from NGS to the issuing bank on eligible transactions.
+            </li>
+            <li>
+              <strong>Shopify Protect</strong>
+              Chargeback protection on eligible D2C orders absorbs the financial loss from fraudulent chargebacks — included for stores on Shopify Payments.
+            </li>
+            <li>
+              <strong>AVS and CVV verification</strong>
+              Address and CVV verification enforced at checkout by default, with risk-based override controls available to NGS finance staff.
+            </li>
+          </ul>
+        </div>
+
+        <div class="win-card shopify">
+          <h4>Compliance &amp; access controls</h4>
+          <ul>
+            <li>
+              <strong>SOC 2 Type II</strong>
+              Independently audited annually against the AICPA Trust Services Criteria for security, availability, confidentiality, and privacy.
+            </li>
+            <li>
+              <strong>ISO 27001 certified</strong>
+              International standard for information security management systems. Certified and surveilled by an accredited registrar.
+            </li>
+            <li>
+              <strong>GDPR &amp; CCPA compliant</strong>
+              Privacy by design across the platform. Standard data processing addendums available. EU data residency options for applicable workloads.
+            </li>
+            <li>
+              <strong>Admin access security</strong>
+              Two-factor authentication required for all Shopify admin users. Role-based permissions limit which staff see payment data. SAML SSO available on Plus. Full audit log of every admin action.
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>What this means for NGS</h3>
+        <ul class="tight">
+          <li><strong>PCI scope —</strong> NGS lands at SAQ A, the lightest annual self-assessment. The Shopify-hosted checkout absorbs the scope that would otherwise sit with NGS or DYODE.</li>
+          <li><strong>No card data in NGS systems —</strong> No card numbers flow through DYODE's storefront code, the NGS admin, or the ERP integration. Tokens only.</li>
+          <li><strong>Vaulted B2B cards —</strong> Quote-to-cart conversion uses vaulted tokens, so the 100–140 daily quote conversions never expose a PAN to NGS staff or finance.</li>
+          <li><strong>Chargeback protection —</strong> Shopify Protect absorbs eligible D2C chargeback losses for the 40% D2C revenue mix.</li>
+          <li><strong>Audit-ready —</strong> SOC 2 and ISO 27001 reports available under NDA for NGS's own vendor due diligence.</li>
+        </ul>
+      </div>
+    </section>
+
     <!-- ── RECOMMENDATION ── -->
     <section class="tab-panel" id="rec">
       <div class="section-header">
-        <div class="section-eyebrow">Section 5</div>
+        <div class="section-eyebrow">Section 6</div>
         <h2>Recommendation.</h2>
         <p class="section-lede">Based on NGS's confirmed requirements and current operating model.</p>
       </div>
